@@ -1,0 +1,207 @@
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.me-2{
+    align-items: center;
+}
+
+.logo1{
+    max-width: 100%;
+    width: 200px;
+    margin: 0px 20px;
+}
+.carrito{
+    border-radius: 50px;
+    background-color: aliceblue;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.588);
+    max-width: 100%;
+    width: 100px;
+}
+button{
+    border: 0;
+    border-radius: 5px;
+}
+.bg-dark{
+    background-color: blueviolet !important;
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: white;
+    text-align: center;
+}
+.navbar-collapse show{
+    flex-grow: 0;
+    flex-basis: 1;
+    margin-top: 10px;
+}
+
+.nav-item{
+    margin-left: 5px;
+    padding: 10px 15px;
+}
+.nav-item:hover{
+    background-color: rgb(43, 0, 84);
+    transition: all 1s;
+    border-radius: 5px;
+}
+
+.me-2{
+    width: 100%;
+    border-radius: 5px;    
+}
+.form-control{
+    font-style: italic;
+    text-transform: uppercase;
+    font-weight:bold;
+    
+}
+.cont-img{
+    margin-top: 10%;
+}
+
+.btn-primary{
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 0px;
+    width: 50%;
+}
+.btn-secundary{
+    font-size: 12px;
+    padding: 15px 20px;
+    align-items: center;
+    width: 50%;
+    margin: 0px 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 0px;
+    float: right;
+}
+.btn-secundary .navbar-collapse{
+    margin-top: 10px;
+}
+.btn-primary:hover{
+    transition: all 1s;
+    background-color: rgb(43, 0, 84);
+}
+.btn-secundary:hover{
+    color: white;
+    transition: all 1s;
+    background-color: rgb(43, 0, 84);
+}
+
+img{
+    max-width: 100%;
+    width: max-content;
+}
+.hr1{
+    width: 100%;
+}
+select{
+    font-size: 12px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.100);
+}
+option{
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+.div-form-select{
+    margin-bottom: 10px;
+    margin-inline: 20px;
+}
+.form-select{
+    font-size: 12px;
+}
+
+.cont-card{
+    height: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.200);
+    margin-top: 15px;
+    margin-bottom: 35px;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.150);
+}
+.marca-shoes{
+    margin: 10px;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 700;
+}
+.info-shoes{
+    margin: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    color: rgba(0, 0, 0, 0.411);
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 500;
+}
+p{
+    text-transform: uppercase;
+}
+.carousel-inner{
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.700);
+}
+.div-tallas{
+    margin-left: 30px;
+    font-size: 10px;
+    font-style: italic;
+    text-align: left;
+}
+.div-tallas a{
+    color: blueviolet;
+}
+
+.btn-carro{
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 10px;
+    color: rgb(193, 112, 255);
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(43, 0, 80);
+    height: 100%;
+    box-sizing: border-box;
+    transition:1s cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+.btn-carro:hover{
+    background-color: transparent;
+    color: rgb(193, 112, 255);
+    border: 2px solid rgb(193, 112, 255);
+    border-color: rgb(193, 112, 255);
+}
+.btn-details{
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 10px;
+    color: rgb(193, 112, 255);
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(43, 0, 80);
+    height: 100%;
+    box-sizing: border-box;
+    transition:1s cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+.btn-details:hover{
+    background-color: transparent;
+    border: 2px solid rgb(193, 112, 255);
+    border-color: rgb(193, 112, 255);
+}
+
+footer{
+    background-color: blueviolet;
+    width: max-content;
+    height: 100%;
+}
+.a-footer{
+    color: white;
+    margin-left: 20px;
+}
+.uptempo{
+    margin-top: -150px;
+    margin-bottom: -50px;
+}
