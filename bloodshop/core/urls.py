@@ -1,8 +1,5 @@
 from django.urls import path
-from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6,
-detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3,
-detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, inicio, inicioadmin, iniciobloodshop, iniciobloodshopadmin,
-mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register
+from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, inicio, inicioadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register
 
 urlpatterns = {
     path('', iniciobloodshop, name="home"),
@@ -37,6 +34,5 @@ urlpatterns = {
     path('ninosadmin', ninosadmin, name="ninosadmin"),
     path('ninos', ninos, name="ninos"),
     path('olvidepassword', olvidepassword, name="olvidepassword"),
-    path('pantallaprincadmin', pantallaprincadmin, name="pantallaprincadmin"),
     path('register', register, name="register"),
 }
