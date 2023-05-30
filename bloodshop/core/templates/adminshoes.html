@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/styles/style-register-shoes.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,800&display=swap" rel="stylesheet">
+    <title>Bloodshop</title>
+</head>
+
+<body>
+    <br></br>
+    <div class="div-cont-title">
+        <a class="a-cont" href="/html-admin/iniciobloodshopadmin.html">BLOODSHOP</a>
+        <p></p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="div-cont-register">
+                    <p class="a-cont1-register">Registro de nueva zapatilla</p>
+                </div>
+                <form action="#" method="POST" enctype="multipart/form-data" name="form1">
+                    {% csrf_token %}
+                    <div class="col-md-6 col-sm-12">
+                        <label class="label-title">Nombre Zapatilla</label>
+                        <input type="" id="nombrezap" class="p-cont-b" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <label class="label-title">Marca Zapatilla</label>
+                        <select class="p-cont-b1" name="marcazap" required>
+                            {% for x in marcas %}
+                            <option value="{{ x.codigo }}">{{ x.nombreMarca }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <label class="label-title">Descripcion Zapatilla</label>
+                        <textarea class="form-control1" id="desczap" cols="30" rows="5"></textarea required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <label class="label-title">Imagen Zapatilla</label>
+                        <input type="file" id="imgzap" class="p-cont-b-img" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <label class="label-title">Precio Zapatilla</label>
+                        <input type="number" id="preciozap" placeholder="Ej: $100.000" class="p-cont-b" required>
+                    </div>
+                    <div class="col-6 columna">
+                       <input class="a-cont-b1" type="submit" value="Registrar">
+                       
+                        <input class="a-cont-b1" type="reset" value="Limpiar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://kit.fontawesome.com/2cb25f2c39.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
