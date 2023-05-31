@@ -16,7 +16,7 @@
   
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
-          <a href="/html/iniciobloodshop.html">
+          <a href="{% url 'iniciobloodshop' %}">
             <img class="logo1" src="{% static 'core/img/logo.jpg' %}" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -25,13 +25,13 @@
           <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link" href="/html/hombre.html">HOMBRE</a>
+                <a class="nav-link" href="{% url 'hombre' %}">HOMBRE</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/html/mujer.html">MUJER</a>
+                <a class="nav-link" href="{% url 'mujer' %}">MUJER</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/html/ninos.html">NIÑOS</a>
+                <a class="nav-link" href="{% url 'ninos' %}">NIÑOS</a>
               </li>
               
             </ul>
@@ -43,8 +43,8 @@
                 <button type="submit">
                   <i class="fa fa-search"></i>
                 </button>
-                <a class="btn btn-secundary" href="/html/inicio.html">Iniciar Sesión</a>
-                <a href="/html/carrito.html">
+                <a class="btn btn-secundary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+                <a href="{% url 'carrito' %}">
                   <img class="carrito" src="{% static 'core/img/carrito-de-compras.png' %}" alt="">
                 </a>
                 
@@ -86,75 +86,75 @@
         <div class="row">
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">NIKE</h4>
               <img src="{% static 'core/img/zapatillamujer1.webp' %}" alt="">
               <p class="tittle-shoes">Nike Dunk Animal Instinct</p>
               <p class="p-price">$109.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsgirl1.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsgirl1' %}">DETALLES</a>
               
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">NIKE</h4>
               <img src="{% static 'core/img/zapatillamujer2.webp' %}" alt="">
               <p class="tittle-shoes">Nike Dunk Low Sans-Drift</p>
               <p class="p-price">$129.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsgirl2.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsgirl2' %}">DETALLES</a>
               
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="{% static 'core/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">NIKE</h4>
               <img src="{% static 'core/img/zapatillamujer4.webp' %}" alt="">
               <p class="tittle-shoes">Nike Dunk High Sand-Drift</p>
               <p class="p-price">$189.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsgirl3.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsgirl3' %}">DETALLES</a>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">PUMA</h4>
               <img src="{% static 'core/img/zapatillamujer5.webp' %}" alt="">
               <p class="tittle-shoes">Puma-RS-Sci-Fi-White</p>
               <p class="p-price">$89.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsgirl4.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsgirl4' %}">DETALLES</a>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">ADIDAS</h4>
               <img src="{% static 'core/img/zapatilla6.webp' %}" alt="">
               <p class="tittle-shoes">Adidas-Sambarose-Black-White-Gum</p>
               <p class="p-price">$119.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsgirl5.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsgirl5' %}">DETALLES</a>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">ADIDAS</h4>
               <img src="{% static 'core/img/zapatillamujer7.webp' %}" alt="">
               <p class="tittle-shoes">Adidas-Gazelle-Indoor-Bold-Orange</p>
               <p class="p-price">$69.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsgirl6.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsgirl6' %}">DETALLES</a>
             </div>
           </div>
           

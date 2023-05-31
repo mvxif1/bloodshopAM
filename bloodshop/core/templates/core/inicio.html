@@ -14,7 +14,7 @@
 <body>
     <br></br>
     <div class="div-cont">
-        <a class="a-cont" href="/html/iniciobloodshop.html">BLOODSHOP</a>
+        <a class="a-cont" href="{% url 'iniciobloodshop' %}">BLOODSHOP</a>
         <p></p>
     </div>
 
@@ -35,7 +35,7 @@
                     <input type="password" id="clave" class="p-cont-b" required>
                 </div>
 
-                <a class="p-cont12" href="/html/olvidepassword.html">¿Olvidaste tu contraseña?</a>
+                <a class="p-cont12" href="{% url 'olvidepassword' %}">¿Olvidaste tu contraseña?</a>
 
                 <div class="div-cont2">
 
@@ -44,7 +44,7 @@
                     </div>
                     <br>
                     <a class="p-cont1">Necesitas una cuenta?</a>
-                    <a class="p-cont123" href="/html/register.html">Registrate</a>
+                    <a class="p-cont123" href="{% url 'register' %}">Registrate</a>
             </form>
             <script src="/scripts/validaciones-login.js"></script>
         </div>
