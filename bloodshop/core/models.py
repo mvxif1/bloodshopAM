@@ -25,3 +25,14 @@ class Venta(models.Model):
 
     def __str__(self) -> str:
         return self.Venta
+    
+class Producto(models.Model):
+    id_producto = models.IntegerField(primary_key=True)   
+    nombre = models.CharField(max_length=30)
+    descripcion = models.CharField(max_length=300)
+    precio = models.IntegerField()
+    stock = models.IntegerField()
+    foto = models.ImageField(upload_to="Inicioproject")
+
+    def __str__(self) -> str:
+        return self.producto
