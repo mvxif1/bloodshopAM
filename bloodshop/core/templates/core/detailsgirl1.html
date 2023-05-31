@@ -16,7 +16,7 @@
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-      <a href="/html/iniciobloodshop.html">
+      <a href="{% url 'iniciobloodshop' %}">
         <img class="logo1" src="{% static 'core/img/logo.jpg' %}" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -25,13 +25,13 @@
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/html/hombre.html">HOMBRE</a>
+            <a class="nav-link" href="{% url 'hombre' %}">HOMBRE</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/html/mujer.html">MUJER</a>
+            <a class="nav-link" href="{% url 'mujer' %}">MUJER</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/html/ninos.html">NIÑOS</a>
+            <a class="nav-link" href="{% url 'ninos' %}">NIÑOS</a>
           </li>
         </ul>
 
@@ -42,8 +42,8 @@
           <button type="submit">
             <i class="fa fa-search"></i>
           </button>
-          <a class="btn btn-secundary" href="/html/inicio.html">Iniciar Sesión</a>
-          <a href="/html/carrito.html">
+          <a class="btn btn-secundary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+          <a href="{% url 'carrito' %}'">
             <img class="carrito" src="{% static 'core/img/carrito-de-compras.png' %}" alt="">
           </a>
           

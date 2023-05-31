@@ -17,7 +17,7 @@
   
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
-          <a href="/html-admin/iniciobloodshop-admin.html">
+          <a href="{% url 'iniciobloodshopadmin' %}">
             <img class="logo1" src="{% static 'core/img/logo.jpg' %}" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -26,13 +26,13 @@
           <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link" href="hombreadmin.html">HOMBRE</a>
+                <a class="nav-link" href="{% url 'hombreadmin' %}">HOMBRE</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="mujeradmin.html">MUJER</a>
+                <a class="nav-link" href="{% url 'mujeradmin' %}">MUJER</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="ninosadmin.html">NIÑOS</a>
+                <a class="nav-link" href="{% url 'ninosadmin' %}">NIÑOS</a>
               </li>
 
             </ul>
@@ -42,8 +42,8 @@
               <button type="submit">
                 <i class="fa fa-search"></i>
               </button>
-              <a class="btn btn-secundary" href="/htmladmin/adminshoes.html">Añadir Zapatilla</a>
-              <a href="/html/iniciobloodshop.html">
+              <a class="btn btn-secundary" href="{% url 'adminshoes' %}">Añadir Zapatilla</a>
+              <a href="{% url 'iniciobloodshop' %}">
                 <img class="carrito" src="{% static 'core/img/clientenashe.jpg' %}" alt="">
               </a>
             </form>
@@ -85,93 +85,93 @@
         <div class="row">
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">NIKE</h4>
               <img src="{% static 'core/img/af1travis.jpg' %}" alt="">
               <p class="tittle-shoes">Nike Air Force 1 Travis Scott</p>
               <p class="p-price">$309.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsmen1.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsmen1' %}">DETALLES</a>
               <br><br>
-              <a class="btn-edit" href="/html/detailsmen1.html">Editar</a>
-              <a class="btn-edit" href="/html/detailsmen1.html">Eliminar</a>
+              <a class="btn-edit" href="{% url 'detailsmen1' %}">Editar</a>
+              <a class="btn-edit" href="{% url 'detailsmen1' %}">Eliminar</a>
               
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">ADIDAS</h4>
               <img src="{% static 'core/img/badbunnyforum.jpg' %}" alt="">
               <p class="tittle-shoes">Bad Bunny Low Forum</p>
               <p class="p-price">$329.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsmen2.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsmen2' %}">DETALLES</a>
               <br><br>
-              <a class="btn-edit" href="/html/detailsmen2.html">Editar</a>
-              <a class="btn-edit" href="/html/detailsmen2.html">Eliminar</a>
+              <a class="btn-edit" href="{% url 'detailsmen2' %}">Editar</a>
+              <a class="btn-edit" href="{% url 'detailsmen2' %}">Eliminar</a>
               
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">NIKE</h4>
               <img src="{% static 'core/img/af1n.jpg' %}" alt="">
               <p class="tittle-shoes">Nike Air Force 1 Low</p>
               <p class="p-price">$109.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsmen3.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsmen3' %}">DETALLES</a>
               <br><br>
-              <a class="btn-edit" href="/html/detailsmen3.html">Editar</a>
-              <a class="btn-edit" href="/html/detailsmen3.html">Eliminar</a>
+              <a class="btn-edit" href="{% url 'detailsmen3' %}">Editar</a>
+              <a class="btn-edit" href="{% url 'detailsmen3' %}">Eliminar</a>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">JORDAN</h4>
               <img src="{% static 'core/img/jordan4men.jpg' %}" alt="">
               <p class="tittle-shoes">Jordan Retro 4 Metallic Purple</p>
               <p class="p-price">$189.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsmen4.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsmen4' %}">DETALLES</a>
               <br><br>
-              <a class="btn-edit" href="/html/detailsmen4.html">Editar</a>
-              <a class="btn-edit" href="/html/detailsmen4.html">Eliminar</a>
+              <a class="btn-edit" href="{% url 'detailsmen4' %}">Editar</a>
+              <a class="btn-edit" href="{% url 'detailsmen4' %}">Eliminar</a>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">JORDAN</h4>
               <img src="{% static 'core/img/jordan11.jpg' %}" alt="">
               <p class="tittle-shoes">Jordan Retro 11 Low Bred</p>
               <p class="p-price">$179.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsmen5.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsmen5' %}">DETALLES</a>
               <br><br>
-              <a class="btn-edit" href="/html/detailsmen5.html">Editar</a>
-              <a class="btn-edit" href="/html/detailsmen5.html">Eliminar</a>
+              <a class="btn-edit" href="{% url 'detailsmen5' %}">Editar</a>
+              <a class="btn-edit" href="{% url 'detailsmen5' %}">Eliminar</a>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-12">
             <div class="cont-card">
-              <a href="/html/producto.html"></a>
+              <a href="{% url 'producto' %}"></a>
               <h4 class="marca-shoes">JORDAN</h4>
               <img src="{% static 'core/img/jordan13.png' %}" alt="">
               <p class="tittle-shoes">Air Jordan 13 Retro Chicago</p>
               <p class="p-price">$169.990</p>
               <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-              <a class="btn-details" href="/html/detailsmen6.html">DETALLES</a>
+              <a class="btn-details" href="{% url 'detailsmen6' %}">DETALLES</a>
               <br><br>
-              <a class="btn-edit" href="/html/detailsmen6.html">Editar</a>
-              <a class="btn-edit" href="/html/detailsmen6.html">Eliminar</a>
+              <a class="btn-edit" href="{% url 'detailsmen6' %}">Editar</a>
+              <a class="btn-edit" href="{% url 'detailsmen6' %}">Eliminar</a>
             </div>
           </div>
           
