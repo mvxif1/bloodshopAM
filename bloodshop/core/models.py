@@ -29,6 +29,7 @@ class Venta(models.Model):
 class Producto(models.Model):
     id_producto = models.IntegerField(primary_key=True)   
     nombre = models.CharField(max_length=30)
+    marca = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=300)
     precio = models.IntegerField()
     stock = models.IntegerField()
@@ -38,13 +39,3 @@ class Producto(models.Model):
         return self.producto
     
 
-class zapatilla(models.Model):
-    id_z  = models.IntegerField(primary_key=True)
-    nombre_z = models.CharField(max_length=30)
-    marca = models.CharField(max_length=30)
-    precio = models.IntegerField()
-
-
-    def __str__(self) -> str:
-            return self.zapatilla
-    
