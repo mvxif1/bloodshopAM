@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             name='producto',
             fields=[
                     ('id_producto'), models.IntegerField(primary_key=True)   
-                    ('nombre') , models.CharField(max_length=30)
+                    ('nombreproduct') , models.CharField(max_length=30)
                     ('descripcion') , models.CharField(max_length=300)
                     ('precio') , models.IntegerField()
                     ('stock') , models.IntegerField()
