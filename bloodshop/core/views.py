@@ -79,6 +79,9 @@ def inicio(request):
 def inicioadmin(request):
     return render(request, 'core/inicioadmin.html')
 
+def adminshoes(request):
+    return render(request, 'core/adminshoes.html')
+
 def iniciobloodshop(request):
     return render(request, 'core/iniciobloodshop.html')
     
