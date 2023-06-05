@@ -33,4 +33,27 @@ class Migration(migrations.Migration):
                 ('carrito', models.IntegerField()),
             ],
         ),
+
+        migrations.CreateModel(
+            name='producto',
+            fields=[
+                    ('id_producto'), models.IntegerField(primary_key=True)   
+                    ('nombre') , models.CharField(max_length=30)
+                    ('descripcion') , models.CharField(max_length=300)
+                    ('precio') , models.IntegerField()
+                    ('stock') , models.IntegerField()
+                    ('foto') , models.ImageField(upload_to="Inicioproject")
+            ],
+        ),
+
+         migrations.CreateModel(
+            name='zapatilla',
+            fields=[
+                    ('id_z') , models.IntegerField(primary_key=True)
+                    ('nombre_z') , models.CharField(max_length=30)
+                    ('marca') , models.CharField(max_length=30)
+                    ('precio') , models.IntegerField()
+
+            ],
+        ),
     ]
