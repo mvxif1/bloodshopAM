@@ -3,7 +3,7 @@ from core.models import Venta, Usuario
 
 
 
- class UsuarioSerializer(serializers.ModelSerializer):
+class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields =['rut','nombre','apellido','fecha_nacimiento','telefono','email','contraseña']

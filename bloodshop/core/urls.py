@@ -1,9 +1,12 @@
 from django.urls import path
-from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, inicio, inicioadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register
+from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, inicio, inicioadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas
 from core import views
+
 urlpatterns = [
     path('', iniciobloodshop, name="iniciobloodshop"),
+    path('adminshoes/', adminshoes, name="adminshoes"),
     path('carrito/', carrito, name="carrito"),
+    path('details/', details, name="details"),
     path('detailsgirl1/', detailsgirl1, name="detailsgirl1"),
     path('detailsgirl2/', detailsgirl2, name="detailsgirl2"),
     path('detailsgirl3/', detailsgirl3, name="detailsgirl3"),
@@ -22,13 +25,11 @@ urlpatterns = [
     path('detailsninos4/', detailsninos4, name="detailsninos4"),
     path('detailsninos5/', detailsninos5, name="detailsninos5"),
     path('detailsninos6/', detailsninos6, name="detailsninos6"),   
-    path('details/', details, name="details"),
     path('hombreadmin/', hombreadmin, name="hombreadmin"),
     path('hombre/', hombre, name="hombre"),
-    path('adminshoes/', adminshoes, name="adminshoes"),
     path('inicioadmin/', inicioadmin, name="inicioadmin"),
     path('iniciobloodshopadmin/', iniciobloodshopadmin, name="iniciobloodshopadmin"),
-    path('iniciobloodshop/', iniciobloodshop, name="iniciobloodshop"),
+    path('lista_zapatillas', lista_zapatillas, name= "lista_zapatillas"),
     path('inicio/', inicio, name="inicio"),
     path('mujeradmin/', mujeradmin, name="mujeradmin"),
     path('mujer/', mujer, name="mujer"),
@@ -36,4 +37,5 @@ urlpatterns = [
     path('ninos/', ninos, name="ninos"),
     path('olvidepassword/', olvidepassword, name="olvidepassword"),
     path('register/', register, name="register"),
+
 ]

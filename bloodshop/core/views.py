@@ -1,33 +1,9 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import redirect
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
-from django.views.decorators.csrf import csrf_exempt
-from core.models import Usuario, Venta
-from .serializers import UsuarioSerializer, VentaSerializer
+
 
 # Create your views here.
-@csrf_exempt
-@api_view(['GET','POST'])
-def lista_zapatillas(request):
-    if request.method == 'GET':
-       Usuario = Usuario.objects.all()
-       serializer = UsuarioSerializers(usuario,many=True)
-       return Response(serializer.data)
-    elif request.method == 'POST':
-       data = JSONParser().parse(request)
-       serializer = UsuarioSerializers(data = data)
-       if serializer.is_valid():
-           serializer.save()
-           return Response(serializer.data, status= status.HTTP_201_CREATED)
-       else:
-           return Responde(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
-
-
 
 def adminshoes(request):
     return render(request, 'core/adminhoes.html')
@@ -131,4 +107,5 @@ def olvidepassword(request):
 def register(request):
     return render(request, 'core/register.html')
 
-
+def lista_zapatillas(request):
+    return render(request, 'core/lista_zapatillas.html')
