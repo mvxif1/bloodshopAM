@@ -130,3 +130,5 @@ def olvidepassword(request):
 
 def register(request):
     return render(request, 'core/register.html')
+
+

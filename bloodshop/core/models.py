@@ -19,9 +19,9 @@ class Usuario(models.Model):
 class Venta(models.Model):
     id_venta        = models.IntegerField(primary_key=True)
     fecha_venta     = models.DateField()
-    total           = models.IntegerField()
+    total           = models.IntegerField(10)
     estado          = models.CharField(max_length=20)
-    carrito         = models.IntegerField()
+    carrito         = models.IntegerField(10)
 
     def __str__(self) -> str:
         return self.Venta
@@ -30,21 +30,11 @@ class Producto(models.Model):
     id_producto     = models.IntegerField(primary_key=True)   
     nombreproduct   = models.CharField(max_length=30)
     descripcion     = models.CharField(max_length=300)
-    precio          = models.IntegerField()
-    stock           = models.IntegerField()
+    precio          = models.IntegerField(10)
+    stock           = models.IntegerField(10)
     foto            = models.ImageField(upload_to="Inicioproject")
 
     def __str__(self) -> str:
         return self.producto
     
 
-class zapatilla(models.Model):
-    id_z  = models.IntegerField(primary_key=True)
-    nombre_z = models.CharField(max_length=30)
-    marca = models.CharField(max_length=30)
-    precio = models.IntegerField()
-
-
-    def __str__(self) -> str:
-            return self.zapatilla
-    
