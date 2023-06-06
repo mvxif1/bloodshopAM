@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import redirect
+from .models import Usuario, Venta, Marca, Zapatilla
 
 
 # Create your views here.
@@ -80,9 +81,6 @@ def inicio(request):
 def inicioadmin(request):
     return render(request, 'core/inicioadmin.html')
 
-def adminshoes(request):
-    return render(request, 'core/adminshoes.html')
-
 def iniciobloodshop(request):
     return render(request, 'core/iniciobloodshop.html')
     
@@ -108,4 +106,62 @@ def register(request):
     return render(request, 'core/register.html')
 
 def lista_zapatillas(request):
-    return render(request, 'core/lista_zapatillas.html')
+    listaMascota = Mascota.objects.all()
+    contexto = {
+        "listaZap": listaMascota
+    }
+    return render(request,'core/lista_zapatillas',contexto)
+
+def adminshoes(request):
+    arregloZap = Marca.objects.all()
+    contexto = {
+        "marcas": arregloZap
+    }
+    return render(request, 'core/adminshoes.html')
+
+def editarshoes(request,idzap):
+    zapatilla = Zapatilla.objects.get(id_producto = idzap)
+    marcas = Marca.objects.all()
+    contexto = {
+        "datos": zapatilla,
+        "listaMarcas": marcas
+    }
+    return render(request,'core/editarshoes.html', contexto)
+
+def ingresarzapatilla(request):
+    idZ     = request.POST['idzap']
+    nombreZ = request.POST['nombrezap']
+    marcaZ = request.POST['marcazap']
+    descZ = request.POST['desczap']
+    fotoZ = request.FILES['imgzap']
+    precioZ = request.POST['preciozap']
+
+    marcaZapatilla = Zapatilla.object.get(codigo = marcaZ)
+
+    Zapatilla.objects.create(id_producto= idZ, nombreproduct= nombrezap, marcaproduct= marcazap, descripcion= desczap, foto= imgzap , precio= preciozap)
+    return redirect('agregarzapatilla')
+
+def eliminarZap(request, idzap):
+    zapatilla = Zapatilla.objects.get(id_producto = idzap)
+    zapatilla.delete()
+
+    return redirect('lista_zapatilla')
+
+def actualizarZapatilla(request):
+    codigoZap     = request.POST['idzap']
+    nomZap  = request.POST['nombrezap']
+    marcZap = request.POST['marcazap']
+    descripZap = request.POST['desczap']
+    priceZap = request.POST['preciozap']
+
+    zapatilla = Zapatilla.objects.get(id_producto = codigoZap)
+    zapatilla.nombreproduct = nomZap
+    
+    registroMarca = marcaproduct.objects.get(codigoMarca = marcZap)
+    zapatilla.marcazap = registroMarca
+
+    zapatilla.descripcion = desczap
+    zapatilla.precio = priceZap
+
+    zapatilla.save()
+    return redirect('core/lista_zapatillas')

@@ -25,16 +25,22 @@ class Venta(models.Model):
 
     def __str__(self) -> str:
         return self.Venta
-    
-class Producto(models.Model):
-    id_producto     = models.IntegerField(primary_key=True)   
-    nombreproduct   = models.CharField(max_length=30)
-    descripcion     = models.CharField(max_length=300)
-    precio          = models.IntegerField(10)
-    stock           = models.IntegerField(10)
-    foto            = models.ImageField(upload_to="Inicioproject")
+
+class Marca(models.Model):
+    codigoMarca     = models.AutoField(primary_key=True)
+    nombreMarca      = models.CharField(null=True, max_length=25, blank=True)    
 
     def __str__(self) -> str:
-        return self.producto
+        return self.nombreMarca
+
+class Zapatilla(models.Model):
+    id_producto     = models.IntegerField(primary_key=True)   
+    nombreproduct   = models.CharField(max_length=30)
+    marcaproduct    = models.ForeignKey(Marca,on_delete=models.CASCADE)
+    descripcion     = models.CharField(max_length=300)
+    foto            = models.ImageField(upload_to="zapatillas")
+    precio          = models.IntegerField(10)
+    def __str__(self) -> str:
+        return self.nombreproduct
     
 

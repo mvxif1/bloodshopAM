@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 {% load static %}
 
@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Listado Mascotas</title>
+    <title>Listado Zapatillas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -21,25 +21,24 @@
 
     <table border="1">
         <tr>
-            <th>Chip</th>
             <th>Nombre</th>
-            <th>Edad</th>
-            <th>Foto</th>
-            <th>Raza</th>
-            <th>Acciones</th>
+            <th>Marca</th>
+            <th>Descripcion</th>
+            <th>Imagen</th>
+            <th>Precio</th>
         </tr>
 
-        {% for m in listaM %}
+        {% for m in listaZap %}
         <tr>
-            <td>{{ m.codigoChip }}</td>
-            <td>{{ m.nombreMascota }}</td>
-            <td>{{ m.edadMascota }}</td>
+            <td>{{ m.id_producto }}</td>
+            <td>{{ m.nombreproduct }}</td>
             <td>
 
                 <img src="{{ m.foto.url }}" alt="No foto">
 
             </td>
-            <td>{{ m.raza.nombreRaza }}</td>
+            <td>{{ m.precio }}</td>
+            <td>{{ m.raza.nombreRaz }}</td>
             <td>
                 <a href="{% url 'modificar' m.codigoChip %}" class="btn btn-primary">Modificar</a><br>
                 <a href="{% url 'eliminarM' m.codigoChip %}" class="btn btn-danger">Eliminar</a>
