@@ -28,20 +28,21 @@
             <th>Precio</th>
         </tr>
 
-        {% for m in listaZap %}
+        {% for m in listaZapatilla %}
         <tr>
             <td>{{ m.id_producto }}</td>
             <td>{{ m.nombreproduct }}</td>
+            <td>{{ m.marca.nombreMarca }}</td>
             <td>
 
                 <img src="{{ m.foto.url }}" alt="No foto">
 
             </td>
             <td>{{ m.precio }}</td>
-            <td>{{ m.raza.nombreRaz }}</td>
+
             <td>
-                <a href="{% url 'modificar' m.codigoChip %}" class="btn btn-primary">Modificar</a><br>
-                <a href="{% url 'eliminarM' m.codigoChip %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'modificar' m.codigoMarca %}" class="btn btn-primary">Modificar</a><br>
+                <a href="{% url 'eliminarZap' m.codigoMarca %}" class="btn btn-danger">Eliminar</a>
             </td>
 
         </tr>

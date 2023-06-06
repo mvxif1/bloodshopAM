@@ -5,9 +5,6 @@ from .models import Usuario, Venta, Marca, Zapatilla
 
 
 # Create your views here.
-
-def adminshoes(request):
-    return render(request, 'core/adminhoes.html')
     
 def carrito(request):
     return render(request, 'core/carrito.html')
@@ -16,7 +13,18 @@ def details(request):
     return render(request, 'core/details.html')
     
 def detailsgirl1(request):
-    return render(request, 'core/detailsgirl1.html')
+    nombreZapatilla = "Nike Dunk Animal Instinct"
+    marcaZapatilla = "Nike"
+    descripcion= "Desde los tableros hasta el skateboard, la influencia del Nike Dunk es innegable. Aunque se presentó como un calzado de básquetbol en 1985, la suela plana y adherente es perfecta para una comunidad deportiva desatendida: los skaters. Al revelar una subcultura que anhela la creatividad tanto como la funcionalidad, el Dunk lanzó décadas de incontables gamas de colores que continúan capturando el alma de los skaters de costa a costa."
+    precioZapatilla = 109990
+
+    contexto = {
+        "dato1" : nombreZapatilla,
+        "dato2" : marcaZapatilla,
+        "dato3" : descripcion,
+        "dato4" : precioZapatilla
+    }    
+    return render(request, 'core/detailsgirl1.html', contexto)
     
 def detailsgirl2(request):
     return render(request, 'core/detailsgirl2.html')
@@ -105,19 +113,19 @@ def olvidepassword(request):
 def register(request):
     return render(request, 'core/register.html')
 
-def lista_zapatillas(request):
-    listaMascota = Mascota.objects.all()
+def listado(request):
+    listaZapatilla = Zapatilla.objects.all()
     contexto = {
-        "listaZap": listaMascota
+        "listaZap": listaZapatilla
     }
-    return render(request,'core/lista_zapatillas',contexto)
+    return render(request,'core/lista_zapatillas.html',contexto)
 
 def adminshoes(request):
     arregloZap = Marca.objects.all()
     contexto = {
         "marcas": arregloZap
     }
-    return render(request, 'core/adminshoes.html')
+    return render(request, 'core/adminshoes.html', contexto)
 
 def editarshoes(request,idzap):
     zapatilla = Zapatilla.objects.get(id_producto = idzap)
@@ -129,17 +137,17 @@ def editarshoes(request,idzap):
     return render(request,'core/editarshoes.html', contexto)
 
 def ingresarzapatilla(request):
-    idZ     = request.POST['idzap']
-    nombreZ = request.POST['nombrezap']
-    marcaZ = request.POST['marcazap']
-    descZ = request.POST['desczap']
-    fotoZ = request.FILES['imgzap']
-    precioZ = request.POST['preciozap']
+        fotoZ = request.FILES['imgzap']
+        idZ     = request.POST['idzap']
+        nombreZ = request.POST['nombrezap']
+        marcaZ = request.POST['marcazap']
+        descZ = request.POST['desczap']
+        precioZ = request.POST['preciozap']
 
-    marcaZapatilla = Zapatilla.object.get(codigo = marcaZ)
+        marcaZapatilla = Marca.objects.get(codigoMarca = marcaZ)
 
-    Zapatilla.objects.create(id_producto= idZ, nombreproduct= nombrezap, marcaproduct= marcazap, descripcion= desczap, foto= imgzap , precio= preciozap)
-    return redirect('agregarzapatilla')
+        Zapatilla.objects.create(id_producto = idZ, nombreproductv = nombrezap, marcaproduct = marcazap, descripcion = desczap, foto = imgzap , precio = preciozap)
+        return redirect('adminshoes')
 
 def eliminarZap(request, idzap):
     zapatilla = Zapatilla.objects.get(id_producto = idzap)

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, inicio, inicioadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas, editarshoes
+from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, inicio, inicioadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas, editarshoes, ingresarzapatilla, eliminarZap, actualizarZapatilla
 from core import views
 
 urlpatterns = [
@@ -30,7 +30,10 @@ urlpatterns = [
     path('inicioadmin/', inicioadmin, name="inicioadmin"),
     path('iniciobloodshopadmin/', iniciobloodshopadmin, name="iniciobloodshopadmin"),
     path('lista_zapatillas', lista_zapatillas, name= "lista_zapatillas"),
-    path('editarshoes/', editarshoes, name= "editarshoes"),
+    path('editarshoes/<int:idzap>', editarshoes, name= "editarshoes"),
+    path('ingresarzapatilla/', ingresarzapatilla, name= "ingresarzapatilla"),
+    path('eliminarZap/<int:idzap>', eliminarZap, name= "eliminarZap"),
+    path('actualizarZapatilla/<int:idzap>', actualizarZapatilla, name= "actualizarZapatilla"),
     path('inicio/', inicio, name="inicio"),
     path('mujeradmin/', mujeradmin, name="mujeradmin"),
     path('mujer/', mujer, name="mujer"),

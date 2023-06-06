@@ -25,7 +25,7 @@
                 <div class="div-cont-register">
                     <p class="a-cont1-register">Registro de nueva zapatilla</p>
                 </div>
-                <form action="{% 'ingresarzapatilla' %}" method="POST" enctype="multipart/form-data" name="form1">
+                <form action="{% url 'ingresarzapatilla' %}" method="POST" enctype="multipart/form-data" name="form1">
                     {% csrf_token %}
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Id Zapatilla</label>
@@ -39,7 +39,7 @@
 
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Marca Zapatilla</label>
-                        <select class="p-cont-b1" name="marcazap" id="marcazap" required>
+                        <select  id="marcazap" name="marcazap" class="p-cont-b1" required>
                             {% for x in marcas %}
                             <option value="{{ x.codigo }}">{{ x.nombreMarca }}</option>
                             {% endfor %}
