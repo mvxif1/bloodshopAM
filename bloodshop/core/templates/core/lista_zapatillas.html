@@ -18,9 +18,10 @@
 </head>
 
 <body>
-
+asdsad
     <table border="1">
         <tr>
+            <th>Id Producto</th>
             <th>Nombre</th>
             <th>Marca</th>
             <th>Descripcion</th>
@@ -28,11 +29,11 @@
             <th>Precio</th>
         </tr>
 
-        {% for m in listaZapatilla %}
+        {% for m in listasZapatillas %}
         <tr>
             <td>{{ m.id_producto }}</td>
             <td>{{ m.nombreproduct }}</td>
-            <td>{{ m.marca.nombreMarca }}</td>
+            <td>{{ m.marcaproduct }}</td>
             <td>
 
                 <img src="{{ m.foto.url }}" alt="No foto">
@@ -41,8 +42,8 @@
             <td>{{ m.precio }}</td>
 
             <td>
-                <a href="{% url 'modificar' m.codigoMarca %}" class="btn btn-primary">Modificar</a><br>
-                <a href="{% url 'eliminarZap' m.codigoMarca %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'editarshoes' m.id_producto %}" class="btn btn-primary">Modificar</a><br>
+                <a href="{% url 'eliminarZap' m.id_producto %}" class="btn btn-danger">Eliminar</a>
             </td>
 
         </tr>

@@ -38,25 +38,25 @@
 
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Marca Zapatilla</label>
-                        <select class="p-cont-b1" name="marcazap" id="marcaZap" required>
+                        <select class="p-cont-b1" name="marcaZap" id="marcaZap" required>
                         {% for r in listaMarcas %}
-                            {% if r.codigoMarca == datos.zapatilla.codigoMarca %}
+                            {% if r.codigoMarca == datos.marcaproduct.codigoMarca %}
                                 <option value="{{ r.codigoMarca }}" selected>{{ r.nombreMarca }}</option>
                             {% else %}
                                 <option value="{{ r.codigoMarca }}">{{ r.nombreMarca }}</option>
-                            {{% endif %}}
+                            {% endif %}
                         {% endfor %}
                         </select>
                     </div>
 
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Descripcion Zapatilla</label>
-                        <textarea value="{{ datos.descripcion }}" class="form-control1" id="desczap" cols="30" rows="5"></textarea required>
+                        <textarea class="form-control1" id="desczap" name="desczap" cols="30" rows="5" required>{{ datos.descripcion }}</textarea>
                     </div>
 
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Precio Zapatilla</label>
-                        <input value="{{ datos.precio }}" type="number" id="preciozap" placeholder="Ej: $100.000" class="p-cont-b" required>
+                        <input value="{{ datos.precio }}" name="preciozap" type="number" id="preciozap" placeholder="Ej: $100.000" class="p-cont-b" required>
                     </div>
                     <div class="col-6 columna">
                        <input class="a-cont-b1" type="submit" value="Registrar">    
