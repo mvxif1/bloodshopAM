@@ -27,7 +27,7 @@ form{
     text-align: center;
     box-sizing: content-box;
     color: rgb(0, 0, 0);
-    text-decoration: none;
+    text-decoration-line: none;
     background-color: rgba(43, 0, 80, 0);
     border-radius: 10px;
     font-size: 55px;
@@ -37,8 +37,9 @@ form{
     transition: all 0.5s ease 0s;
 }
 .a-cont:hover{
+    text-decoration-line: none;
     text-shadow: 0 3px 15px rgba(0, 0, 0, 0.466);
-    color: rgb(43, 0, 80);
+    color: rgb(64, 0, 120);
 }
 .a-cont1{
     font-size: 20px;
@@ -141,7 +142,12 @@ input{
     font-style: italic;
     text-transform: uppercase;
 }
-
+table{
+    width: 95%;
+}
+tr{
+    width: 100%;
+}
 
 @media (min-width: 768px){
     body{

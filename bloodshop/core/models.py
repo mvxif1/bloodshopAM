@@ -37,7 +37,7 @@ class Zapatilla(models.Model):
     id_producto     = models.IntegerField(primary_key=True)   
     nombreproduct   = models.CharField(max_length=30)
     descripcion     = models.CharField(max_length=300)
-    foto            = models.ImageField(upload_to="zapatillas")
+    foto            = models.ImageField(upload_to="zapatillas/")
     precio          = models.IntegerField()
     marcaproduct    = models.ForeignKey(Marca,on_delete=models.CASCADE)
     

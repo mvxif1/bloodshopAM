@@ -7,56 +7,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Listado Zapatillas</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="{% static 'core/css/styleregister.css' %}">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'core/css/stylelistado.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,800&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
-asdsad
-    <table border="1">
-        <tr>
-            <th>Id Producto</th>
-            <th>Nombre</th>
-            <th>Marca</th>
-            <th>Descripcion</th>
-            <th>Imagen</th>
-            <th>Precio</th>
-        </tr>
-
-        {% for m in listasZapatillas %}
-        <tr>
-            <td>{{ m.id_producto }}</td>
-            <td>{{ m.nombreproduct }}</td>
-            <td>{{ m.marcaproduct }}</td>
-            <td>
-
-                <img src="{{ m.foto.url }}" alt="No foto">
-
-            </td>
-            <td>{{ m.precio }}</td>
-
-            <td>
-                <a href="{% url 'editarshoes' m.id_producto %}" class="btn btn-primary">Modificar</a><br>
-                <a href="{% url 'eliminarZap' m.id_producto %}" class="btn btn-danger">Eliminar</a>
-            </td>
-
-        </tr>
+    <div class="div-cont-title">
+        <a class="a-cont">Listado de Zapatillas</a>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         {% endfor %}
+    {% endif %}
+    <table class="col-md-12 col-xl-12" border="1">
+        <thead>
+            <tr>
+                <th>Id Producto</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Descripcion</th>
+                <th>Imagen</th>
+                <th>Precio</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in listasZapatillas %}
+            <tr>
+                <td>{{ m.id_producto }}</td>
+                <td class="td_nom">{{ m.nombreproduct }}</td>
+                <td class="td_nom">{{ m.marcaproduct }}</td>
+                <td>{{ m.descripcion }}</td>
+                <td>
+
+                    <img src="{{ m.foto.url }}" alt="NO FOTO">
+
+                </td>
+                <td>{{m.signo}} {{ m.precio }}</td>
+
+                <td>
+                    <a href="{% url 'editarshoes' m.id_producto %}" class="btn_mod">Modificar</a>
+                    <a href="{% url 'eliminarZap' m.id_producto %}" class="btn_del">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
-    {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                        {% endfor %}
-                </ul>
-                {% endif %}
+
 
 </body>
 

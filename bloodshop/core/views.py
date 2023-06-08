@@ -113,9 +113,11 @@ def register(request):
     return render(request, 'core/register.html')
 
 def lista_zapatillas(request):
+    
     listaZapatilla = Zapatilla.objects.all()
     contexto = {
-        "listasZapatillas": listaZapatilla
+        "listasZapatillas": listaZapatilla,
+        "signo": "$",
     }
     return render(request,'core/lista_zapatillas.html',contexto)
 
@@ -125,7 +127,7 @@ def adminshoes(request):
     contexto = {
         "marcas": arregloZapatillas,
         "zapatillas": zapatillaListado
-    }
+    }    
     return render(request, 'core/adminshoes.html', contexto)
 
 def editarshoes(request,idzap):
@@ -149,27 +151,30 @@ def ingresarzapatilla(request):
 
         zapatilla = Zapatilla.objects.create(
             id_producto = idZ, nombreproduct = nombre, marcaproduct = marcaZapatilla, descripcion = descripcion, foto = foto , precio = precio)
+        messages.add_message(request, messages.SUCCESS, 'El registro se ha guardado correctamente.')
         return redirect('adminshoes')
 
 def eliminarZap(request, idzap):
-    zapatilla = Zapatilla.objects.get(id_producto = idzap)
-    zapatilla.delete()
+    zapatillaEliminar = Zapatilla.objects.get(id_producto = idzap)
+    zapatillaEliminar.delete()
 
-    return redirect('lista_zapatilla')
+    messages.add_message(request, messages.SUCCESS, 'El registro se ha eliminado correctamente.')
+    return redirect('lista_zapatillas')
 
 def actualizarZapatilla(request):
-    codigoZap = request.POST['idzap']
-    nomZap  = request.POST['nombrezap']
-    marcZap = request.POST['marcaZap']
-    descripZap = request.POST['desczap']
-    priceZap = request.POST['preciozap']
+    codigoZap = request.POST['idzap'] 
+    nomZap  = request.POST['nombrezap'] 
+    marcZap = request.POST['marcaZap'] 
+    descripZap = request.POST['desczap'] 
+    priceZap = request.POST['preciozap'] 
 
     zapatilla = Zapatilla.objects.get(id_producto = codigoZap)
     zapatilla.nombreproduct = nomZap
-    registroMarca = Marca.objects.get(codigoMarca = marcZap)
-    zapatilla.marcazap = registroMarca
-    zapatilla.descripcion = descripZap
-    zapatilla.precio = priceZap
 
-    zapatilla.save()
+    registroMarca = Marca.objects.get(codigoMarca = marcZap) 
+    zapatilla.marcaZap = registroMarca 
+    
+    zapatilla.descripcion = descripZap 
+    zapatilla.precio = priceZap
+    messages.add_message(request, messages.SUCCESS, 'El registro se ha actualizado correctamente.')
     return redirect('lista_zapatillas')
