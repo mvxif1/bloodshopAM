@@ -1,3 +1,6 @@
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 .container{
    
@@ -112,4 +115,80 @@ img{
 .redes{
 
     text-transform: none;
+}
+
+.me-2{
+    align-items: center;
+}
+
+.logo1{
+    max-width: 100%;
+    width: 200px;
+    margin: 0px 20px;
+}
+button{
+    border: 0;
+    border-radius: 5px;
+}
+.bg-dark{
+    background-color: blueviolet !important;
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: white;
+    text-align: center;
+}
+.navbar-collapse show{
+    flex-grow: 0;
+    flex-basis: 1;
+    margin-top: 10px;
+}
+
+.nav-item{
+    margin-left: 5px;
+    padding: 10px 15px;
+}
+.nav-item:hover{
+    background-color: rgb(43, 0, 84);
+    transition: all 1s;
+    border-radius: 5px;
+}
+
+.me-2{
+    width: 100%;
+    border-radius: 5px;    
+}
+.form-control{
+    font-style: italic;
+    text-transform: uppercase;
+    font-weight:bold;
+}
+
+.btn-primary{
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 0px;
+    width: 50%;
+}
+.btn-secundary{
+    font-size: 12px;
+    padding: 15px 20px;
+    align-items: center;
+    width: 50%;
+    margin: 0px 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 0px;
+    float: right;
+}
+.btn-secundary .navbar-collapse{
+    margin-top: 10px;
+}
+.btn-primary:hover{
+    transition: all 1s;
+    background-color: rgb(43, 0, 84);
+}
+.btn-secundary:hover{
+    color: white;
+    transition: all 1s;
+    background-color: rgb(43, 0, 84);
 }
