@@ -145,12 +145,14 @@ def ingresarzapatilla(request):
         nombre = request.POST['nombrezap']
         marca = request.POST['marca']
         descripcion = request.POST['desczap']
+        talla2 = request.POST['tallazap']
+        cantidad2 = request.POST['cantidadzap']
         precio = request.POST['preciozap']
 
         marcaZapatilla = Marca.objects.get(codigoMarca = marca)
 
         zapatilla = Zapatilla.objects.create(
-            id_producto = idZ, nombreproduct = nombre, marcaproduct = marcaZapatilla, descripcion = descripcion, foto = foto , precio = precio)
+            id_producto = idZ, nombreproduct = nombre, marcaproduct = marcaZapatilla, descripcion = descripcion, talla = talla2, cantidad = cantidad2, foto = foto , precio = precio)
         messages.add_message(request, messages.SUCCESS, 'El registro se ha guardado correctamente.')
         return redirect('adminshoes')
 
@@ -166,6 +168,8 @@ def actualizarZapatilla(request):
     nombreS = request.POST['nombrezap']
     marcaS = request.POST['marcaS']
     descripcionS = request.POST['desczap']
+    tallaS = request.POST['tallazap']
+    cantidadS = request.POST['cantidadzap']
     precioS = request.POST['preciozap']
 
     zapatilla = Zapatilla.objects.get(id_producto = idS)
@@ -174,6 +178,8 @@ def actualizarZapatilla(request):
     marcaZapatilla = Marca.objects.get(codigoMarca = marcaS)
     zapatilla.marcaproduct = marcaZapatilla
     zapatilla.descripcion = descripcionS
+    zapatilla.talla = tallaS 
+    zapatilla.cantidad = cantidadS
     zapatilla.precio = precioS
     zapatilla.save()   
     return redirect('lista_zapatillas')
