@@ -162,19 +162,19 @@ def eliminarZap(request, idzap):
     return redirect('lista_zapatillas')
 
 def actualizarZapatilla(request):
-    codigoZap = request.POST['idzap'] 
-    nomZap  = request.POST['nombrezap'] 
-    marcZap = request.POST['marcaZap'] 
-    descripZap = request.POST['desczap'] 
-    priceZap = request.POST['preciozap'] 
+    idS     = request.POST['idzap']
+    nombreS = request.POST['nombrezap']
+    marcaS = request.POST['marcaS']
+    descripcionS = request.POST['desczap']
+    precioS = request.POST['preciozap']
 
-    zapatilla = Zapatilla.objects.get(id_producto = codigoZap)
-    zapatilla.nombreproduct = nomZap
+    zapatilla = Zapatilla.objects.get(id_producto = idS)
+    zapatilla.nombreproduct = nombreS
 
-    registroMarca = Marca.objects.get(codigoMarca = marcZap) 
-    zapatilla.marcaZap = registroMarca 
-    
-    zapatilla.descripcion = descripZap 
-    zapatilla.precio = priceZap
-    messages.add_message(request, messages.SUCCESS, 'El registro se ha actualizado correctamente.')
+    marcaZapatilla = Marca.objects.get(codigoMarca = marcaS)
+    zapatilla.marcaproduct = marcaZapatilla
+    zapatilla.descripcion = descripcionS
+    zapatilla.precio = precioS
+    zapatilla.save()   
     return redirect('lista_zapatillas')
+    

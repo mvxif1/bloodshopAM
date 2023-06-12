@@ -38,7 +38,7 @@
 
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Marca Zapatilla</label>
-                        <select class="p-cont-b1" name="marcaZap" id="marcaZap" required>
+                        <select class="p-cont-b1" name="marcaS" id="marcaS" required>
                         {% for r in listaMarcas %}
                             {% if r.codigoMarca == datos.marcaproduct.codigoMarca %}
                                 <option value="{{ r.codigoMarca }}" selected>{{ r.nombreMarca }}</option>

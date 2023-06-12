@@ -10,13 +10,6 @@
     width: 200px;
     margin: 0px 20px;
 }
-.carrito{
-    border-radius: 50px;
-    background-color: aliceblue;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.588);
-    max-width: 100%;
-    width: 100px;
-}
 button{
     border: 0;
     border-radius: 5px;
