@@ -71,16 +71,18 @@
                   <th>Nombre</th>
                   <th>Talla</th>
                   <th>Precio</th>
-                  <th></th>
+                  <th>Cantidad</th>
                 </tr>
               </thead>
               <tbody>
-                {% for a in items%}
+                {% for a in items %}
                 <tr>
+                  <td><img src="{% static '' %}" alt=""></td>
                   <td>{{ a.Zapatilla.nombreproduct}}</td>
                   <td>{{ a.Zapatilla.talla}}</td>
                   <td>{{ a.Zapatilla.precio}}</td>
-                  <td><img src="{% static '' %}" alt=""></td>
+                  <td>{{ a.Zapatilla.cantidad }}</td>
+                  {% endfor %}
                 </tr>
               </tbody>
             </table>
@@ -88,7 +90,7 @@
           </div>
 
           <p class="p-price">PRECIO TOTAL:
-          <div class="total-price"></div>
+          <div class="total-price">${{ total_compra }}</div>
           </p>
           <a class="btn-carro" href="">COMPRAR</a>
         </div>
