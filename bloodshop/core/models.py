@@ -14,17 +14,6 @@ class Usuario(models.Model):
 
     def __str__(self) -> str:
         return self.nombreusuario
-    
-    
-class Venta(models.Model):
-    id_venta        = models.IntegerField(primary_key=True)
-    fecha_venta     = models.DateField()
-    total           = models.IntegerField(10)
-    estado          = models.CharField(max_length=20)
-    carrito         = models.IntegerField(10)
-
-    def __str__(self) -> str:
-        return self.Venta
 
 class Marca(models.Model):
     codigoMarca = models.AutoField(primary_key=True,verbose_name='Código de la zapatilla' )
@@ -37,11 +26,45 @@ class Zapatilla(models.Model):
     id_producto     = models.IntegerField(primary_key=True)   
     nombreproduct   = models.CharField(max_length=30)
     descripcion     = models.CharField(max_length=300)
+    talla           = models.IntegerField()
     foto            = models.ImageField(upload_to="zapatillas/")
     precio          = models.IntegerField()
     marcaproduct    = models.ForeignKey(Marca,on_delete=models.CASCADE)
     
     def __str__(self) -> str:
         return self.nombreproduct
+
+
+class Carrito(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    zapatilla = models.ForeignKey(Zapatilla, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+
+    def subtotal(self):
+        return self.producto.precio * self.cantidad
+        
+class ItemCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+
+    def subtotal(self):
+        return self.producto.precio * self.cantidad
+
+
+    
+
+
+
+
+
+class Venta(models.Model):
+    id_venta        = models.IntegerField(primary_key=True)
+    fecha_venta     = models.DateField()
+    total           = models.IntegerField(10)
+    estado          = models.CharField(max_length=20)
+
+    def __str__(self) -> str:
+        return self.Venta
     
 

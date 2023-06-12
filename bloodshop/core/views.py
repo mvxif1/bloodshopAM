@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Usuario, Venta, Marca, Zapatilla
+from .models import Usuario, Venta, Marca, Zapatilla, Carrito
 
 
 # Create your views here.
@@ -177,4 +177,10 @@ def actualizarZapatilla(request):
     zapatilla.precio = precioS
     zapatilla.save()   
     return redirect('lista_zapatillas')
+
+def vista_carrito(request):
+    carrito = Carrito.objects.get(usuario=request.user)
+    items = carrito.itemcarrito_set.all()
+    total_compra = sum(item.subtotal() for item in items)
+    return render(request, 'carrito.html', {'items': items, 'total_compra': total_compra})
     

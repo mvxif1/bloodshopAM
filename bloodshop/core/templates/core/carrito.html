@@ -71,15 +71,16 @@
                   <th>Nombre</th>
                   <th>Talla</th>
                   <th>Precio</th>
-                  <th>Nombre</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
+                {% for a in items%}
                 <tr>
-                  <td>CACA</td>
-                  <td>9.5 US</td>
-                  <td>PRECIO</td>
-                  <td>CANA</td>
+                  <td>{{ a.Zapatilla.nombreproduct}}</td>
+                  <td>{{ a.Zapatilla.talla}}</td>
+                  <td>{{ a.Zapatilla.precio}}</td>
+                  <td><img src="{% static '' %}" alt=""></td>
                 </tr>
               </tbody>
             </table>
@@ -95,8 +96,6 @@
     </div>
   </div>
   </div>
-
-
 
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
