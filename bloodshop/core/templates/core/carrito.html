@@ -33,7 +33,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'ninos' %}">NIÑOS</a>
           </li>
-          
+
         </ul>
 
         <form class="d-flex">
@@ -66,37 +66,46 @@
             <p class="tittle-shoes">Productos</p>
             <div class="div-form-product">
               <table class="col-md-12 col-xl-12" border="1">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Talla</th>
-                  <th>Precio</th>
-                  <th>Cantidad</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for a in items %}
-                <tr>
-                  <td><img src="{% static '' %}" alt=""></td>
-                  <td>{{ a.Zapatilla.nombreproduct}}</td>
-                  <td>{{ a.Zapatilla.talla}}</td>
-                  <td>{{ a.Zapatilla.precio}}</td>
-                  <td>{{ a.Zapatilla.cantidad }}</td>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Talla</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if request.session.carrito.items %}
+                  {% for key, value in request.session.carrito.items %}
+                  <tr>
+                    <td><img src="{% static '' %}" alt=""></td>
+                    <td>{{ value.nombreproduct}}</td>
+                    <td>{{ value.talla}}</td>
+                    <td>{{ value.precio}}</td>
+                    <td>{{ value.cantidad }}
+                      <a href="{% url 'add' value.zapatilla.id_producto %}" class="badge btn btn-dark">+</a>
+                      <a href="{% url 'sub' value.zapatilla.id_producto %}" class="badge btn btn-dark">-"</a>
+                    </td>
+                  </tr>
                   {% endfor %}
-                </tr>
-              </tbody>
-            </table>
+                  {% else %}
+                  <tr>
+                    <td colspan="3">
+                      <div class="alert-danger text-center">No hay productos</div>
+                    </td>
+                  </tr>
+                  {% endif %}
+                  <tr>
+                    <th scope="row">Total:</th>
+                    <td colspan="2">$ {{total_carrito}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-
-          <p class="p-price">PRECIO TOTAL:
-          <div class="total-price">${{ total_compra }}</div>
-          </p>
-          <a class="btn-carro" href="">COMPRAR</a>
         </div>
       </div>
     </div>
-  </div>
   </div>
 
 

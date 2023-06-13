@@ -77,8 +77,31 @@ def detailsninos6(request):
     return render(request, 'core/detailsninos6.html')
 
 def hombre(request):
-    return render(request, 'core/hombre.html')
-    
+    zapatilla = Zapatilla.objects.all()
+    contexto = {
+        "zapatillas" : zapatilla
+    }
+    return render(request, 'core/hombre.html', contexto)
+
+def agregar_al_carrito(request, zapatilla_id):
+    zapatilla = Zapatilla.objects.get(id=zapatilla_id)
+    carrito, _ = Carrito.objects.get_or_create(usuario=request.user, zapatilla=zapatilla)
+    carrito.cantidad += 1
+    carrito.save()
+
+    return redirect('carrito')
+
+def carrito(request):
+    carrito = Carrito.objects.filter(usuario=request.user)
+    total = 0
+    for item in carrito:
+        total += item.zapatilla.precio * item.cantidad
+    return render(request, 'carrito.html', {'carrito': carrito, 'total': total})
+
+def productos_disponibles(request):
+    zapatillas = Zapatilla.objects.all()
+    return render(request, 'productos_disponibles.html', {'zapatillas': zapatillas})
+
 def hombreadmin(request):
     return render(request, 'core/hombreadmin.html')
     
@@ -184,9 +207,4 @@ def actualizarZapatilla(request):
     zapatilla.save()   
     return redirect('lista_zapatillas')
 
-def vista_carrito(request):
-    carrito = Carrito.objects.get(usuario=request.user)
-    items = carrito.itemcarrito_set.all()
-    total_compra = sum(item.subtotal() for item in items)
-    return render(request, 'carrito.html', {'items': items, 'total_compra': total_compra})
     
