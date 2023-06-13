@@ -23,6 +23,9 @@ form{
     flex-wrap: wrap;
     padding: 20px;
 }
+img{
+    max-width: 10px;
+}
 .a-cont{
     text-align: center;
     box-sizing: content-box;
