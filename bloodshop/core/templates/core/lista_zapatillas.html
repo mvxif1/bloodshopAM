@@ -24,6 +24,9 @@
     <div class="div-cont-title">
         <a class="a-cont">Listado de Zapatillas</a>
     </div>
+    <div>
+        <a href="{% url 'adminshoes' %}" class="btn-dark">Ingresar Zapatilla</a>
+    </div>
     {% if messages %}
         {% for message in messages %}
             <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
