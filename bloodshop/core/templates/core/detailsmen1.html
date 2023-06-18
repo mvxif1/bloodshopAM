@@ -42,7 +42,7 @@
           <button type="submit">
             <i class="fa fa-search"></i>
           </button>
-          <a class="btn btn-secundary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+          <a class="btn btn-secundary" href="{% url 'login' %}">Iniciar Sesión</a>
           <a href="{% url 'carrito' %}">
             <img class="carrito" src="{% static 'core/img/carritodecompras.png' %}" alt="">
           </a>
@@ -53,33 +53,30 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <img src="{% static 'core/img/af1travis.jpg' %}" alt="">
+        <img src="{{ zapatilla.foto.url}}" alt=" {{ zapatilla.nombreproduct }}">
       </div>
       <div class="col-md-6 col-sm-12">
         <div class="cont-card">
-          <h4 class="marca-shoes">NIKE</h4>
+          <h4 class="marca-shoes">{{ zapatilla.marcaproduct }}</h4>
           <div class="col-12">
             <div class="hr1">
               <hr>
             </div>
-            <p class="tittle-shoes">Nike Air Force 1 Travis Scott</p>
-            <p class="info-shoes">La Nike Air Force 1 es quizás la zapatilla más icónica que la marca ha creado hasta la
-              fecha. Desde 1982 hasta la actualidad, es uno de los modelos más vendidos y más queridos en la historia de
-              Nike.</p>
+            <p class="tittle-shoes">{{ zapatilla.nombreproduct }}</p>
+            <p class="info-shoes">{{ zapatilla.descripcion }}</p>
             <div class="div-form-select">
               <select class="form-select">
                 <option>Selecciona tu talla US</option>
-                <option>8 US</option>
-                <option>8.5 US</option>
-                <option>9 US</option>
-                <option>9.5 US</option>
+                {% for talla, stock in tallas_stock %}
+                <option value="{{ talla }}">{{ talla }} - Stock: {{ stock }}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="div-tallas">
               <a href="">Guia de tallas</a>
             </div>
-            <p class="p-price">$309.990</p>
-            <a class="btn-carro" href="">AÑADIR AL CARRO</a>
+            <p class="p-price">${{ zapatilla.precio }}</p>
+            <a class="btn-carro" href="{% url 'agregar_a_carrito' zapatilla.id_producto %}">AÑADIR AL CARRO</a>
             <a class="btn-carro" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UDL6KV4BJF9VS">COMPRAR AHORA</a>
           </div>
         </div>

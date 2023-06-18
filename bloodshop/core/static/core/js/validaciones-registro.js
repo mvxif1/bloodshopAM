@@ -1,10 +1,12 @@
 $(document).ready(function () {
     $("#form").submit(function (e) {
         e.preventDefault();
-        var nombre = $("#nombre").val();
         var apellido = $("#apellido").val();
         var rut = $("#rut").val();
-
+        var fechaNacimiento = new Date($("#fechnac").val());
+        var numero = $("#telefono").val();
+        var correo = $("#email").val();
+        
         let msjMostrar = "";
         let enviarnom = false;
 
@@ -14,28 +16,44 @@ $(document).ready(function () {
         let msjMostrar3 = "";
         let enviarclav = false;
 
+        let msjMostrar4 = "";
+        let enviarfech = false;
+
+        let msjMostrar5 = "";
+        let enviartel = false;
+
+        let msjMostrar6 = "";
+        let enviarcorreo = false;
+
+        let msjMostrar7 = "";
+        let enviarconfcorreo = false;
+
+        let msjMostrar8 = "";
+        let enviarconfclave = false;
 
         //Aqui estan las validaciones de el nombre
-        if (nombre == '') {
+        
+        var nombre = $("#nombre").val();
+        var regex = /^[a-zA-Z0-9\s]+$/;
+
+        if (nombre.trim() === '') {
             msjMostrar += ("Por favor, ingrese su nombre");
             enviarnom = true;
         }
-        if (nombre.trim().length < 3 || nombre.trim().length > 12) {
-            msjMostrar += "*El nombre debe tener entre 3 y 12 caracteres";
+
+        if (nombre.trim().length < 3) {
+            msjMostrar += ("<br>El nombre debe tener al menos 3 caracteres");
             enviarnom = true;
         }
-
-        var letra = nombre.trim().charAt(0);
-        if (!esMayuscula(letra)) {
-            msjMostrar += "<br>*El nombre debe comenzar con mayúscula";
+        
+        if (!regex.test(nombre)) {
+            msjMostrar += ("<br>El nombre no puede contener caracteres especiales");
             enviarnom = true;
 
         }
 
-        if (!/^[a-zA-Z\s]*$/.test(nombre)) {
-            msjMostrar += ("<br>*El nombre solo debe contener letras");
-            enviarnom = true;
-        }
+
+    
         if (enviarnom) {
             $("#incompleto").css("color", "red");
             $("#incompleto").html(msjMostrar);
@@ -48,19 +66,20 @@ $(document).ready(function () {
 
 
         //Aqui estan las validaciones de el apellido
-        if (apellido.trim().length < 4 || apellido.trim().length > 12) {
-            msjMostrar2 += "*El apellido debe tener entre 4 y 12 caracteres";
-            enviarape = true;
-        }
-
-        var letra = apellido.trim().charAt(0);
-        if (!esMayuscula(letra)) {
-            msjMostrar2 += ("<br>El apellido debe comenzar con mayúscula");
+        if (apellido.trim() === '') {
+            msjMostrar2 += ("Porfavor, ingrese su apellido");
             enviarape = true;
 
         }
-        if (!/^[a-zA-Z\s]*$/.test(apellido)) {
-            msjMostrar2 += ("<br>El apellido solo debe contener letras");
+        
+        if (apellido.trim().length < 3) {
+            msjMostrar2 += ("<br>El apellido debe tener al menos 3 caracteres");
+            enviarape = true;
+        }
+
+        
+        if (!regex.test(apellido))  {
+            msjMostrar2 += ("<br>El apellido no puede contener caracteres especiales");
             enviarape = true;
         }
 
@@ -105,20 +124,84 @@ $(document).ready(function () {
 
         }
 
+        //Validar Fecha nacimiento
+        const tiempoTranscurrido = Date.now();
+        const fechaActual = new Date(tiempoTranscurrido);
+        var edadMinima = 18;
+
+
+        
+        if(fechaNacimiento === ''){
+            msjMostrar4 += ("Selecciona tu fecha de nacimiento");
+            enviarfech = true;
+            return
+        }
+        
+        var diferencia = fechaActual - fechaNacimiento;
+        var edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
+
+        if (edad < edadMinima) {
+            msjMostrar4 += ("Debes ser mayor de 18 años");
+            enviarfech = true;
+        }
+
+        if (enviarfech) {
+                $("#incompleto4").css("color", "red");
+                $("#incompleto4").html(msjMostrar4);
+    
+            }
+        else {
+                $("#incompleto4").css("color", "green");
+                $("#incompleto4").html("Completado");
+            }
+            
+
+
+        //Validacion de email
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (correo === '') {
+            msjMostrar6 += ("Por favor, ingrese su correo ");
+            enviarcorreo = true;
+        }
+        if (!regex.test(correo)) {
+            msjMostrar6 += ("<br>Su correo es invalido");
+            enviarcorreo = true;
+        }
+        if (enviarcorreo) {
+            $("#incompleto6").css("color", "red");
+            $("#incompleto6").html(msjMostrar6);
+
+        }
+        else {
+            $("#incompleto6").css("color", "green");
+            $("#incompleto6").html("Completado");
+        }
+
         //Validar Contraseña
 
         var password = $("#clave").val();
         var mayuscula = /[A-Z]/.test(password);
         var minuscula = /[a-z]/.test(password);
         var numero = /[0-9]/.test(password);
+        var caracter = /[!@#$%^&*(),.?":{}|<>]/;
+
+        
+        if (password === ''){
+            msjMostrar3 += ("Por favor, ingresa tu contraseña");
+            enviarclav = true;
+        }
+        if (!caracter.test(password)) {
+            msjMostrar3 += ("<br>La contraseña debe contener al menos un caracter especial");
+            enviarclav = true;
+        }
 
         if (!mayuscula) {
-            msjMostrar3 += ("La contraseña debe contener al menos una letra mayúscula.");
+            msjMostrar3 += ("<br>La contraseña debe contener al menos una letra mayúscula.");
             enviarclav = true;
         }
 
         if (!minuscula) {
-            msjMostrar3 += ('<br>La contraseña debe contener al menos una letra minúscula.');
+            msjMostrar3 += ("<br>La contraseña debe contener al menos una letra minúscula.");
             enviarclav = true;
         }
 
@@ -141,17 +224,41 @@ $(document).ready(function () {
             $("#incompleto3").css("color", "green");
             $("#incompleto3").html("Completado");
         }
-
-        if (enviarnom == false && enviarape == false && enviarclav == false) {
-            alert("El formulario de registro se envio correctamente");
+        
+        // Validar confirmar contraseña y email
+        var confirmPassword = $('#confclave').val();
+        
+        if (password !== confirmPassword) {
+            msjMostrar7 += ("El email no coincide");
+            enviarconfcorreo = true;
         }
-        if (correo.trim() === '' || contraseña.trim() === '') {
-            alert('Por favor ingrese su nombre de usuario y contraseña.');
-            return;
-          }
+        if (enviarconfcorreo) {
+            $("#incompleto7").css("color", "red");
+            $("#incompleto7").html(msjMostrar7);
 
+        }
+        else {
+            $("#incompleto7").css("color", "green");
+            $("#incompleto7").html("Completado");
+        }
 
+        var confirmPassword = $('#confclave').val();
+        
+        if (password !== confirmPassword) {
+            msjMostrar8 += ("La contraseña no coincide");
+            enviarconfclave = true;
+        }
+        if (enviarconfclave) {
+            $("#incompleto8").css("color", "red");
+            $("#incompleto8").html(msjMostrar8);
+
+        }
+        else {
+            $("#incompleto8").css("color", "green");
+            $("#incompleto8").html("Completado");
+        }
     });
+    
     function esMayuscula(letra) {
         console.log("Estoy aqui");
         console.log(letra);

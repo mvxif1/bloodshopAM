@@ -41,12 +41,9 @@
           <button type="submit">
             <i class="fa fa-search"></i>
           </button>
-          <a class="btn btn-secundary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+          <a class="btn btn-secundary" href="{% url 'login' %}">Iniciar Sesión</a>
           <a href="{% url 'carrito' %}">
             <img class="carrito" src="{% static 'core/img/carritodecompras.png' %}" alt="Carrito">
-          </a>
-          <a href="{% url 'inicioadmin' %}">
-            <img class="carrito" src="{% static 'core/img/admin.png' %}" alt="Admin">
           </a>
         </form>
 
@@ -87,26 +84,32 @@
     </button>
   </div>
 
-
+  {% if messages %}
+  {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-dismissible fade show" style="margin-left: 50px; margin-right: 50px;" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+      </div>
+  {% endfor %}
+{% endif %}
   <div class="container-fluid">
-    <div class="row-cols-12">
+    <div class="row">
+{% for zapatilla in zapatillas %}
       <div class="col-md-4 col-sm-12">
         <div class="cont-card">
           <a href="{% url 'hombre' %}"></a>
-          {% for zapatilla in zapatillas %}
+          
           <h4 class="marca-shoes">{{ zapatilla.marcaproduct }}</h4>
           <img src="{{ zapatilla.foto.url }}" alt="{{ zapatilla.nombreproduct }}">
           <p class="tittle-shoes">{{ zapatilla.nombreproduct }}</p>
           <p class="p-price">${{ zapatilla.precio }}</p>
-          <form action="{% url 'agregar_al_carrito' zapatilla.id_producto %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn-carro">AÑADIR AL CARRO</button>
-          </form>
-          {% endfor %}
-          <a class="btn-details" href="{% url 'detailsmen2' %}">DETALLES</a>
+          <a href="{% url 'agregar_a_carrito' zapatilla.id_producto %}" class="btn-carro">AÑADIR AL CARRO</a>
+          <a class="btn-details" href="{{ zapatilla.get_absolute_url }}">DETALLES</a>
 
         </div>
       </div>
+  {% endfor %}
+
     </div>
   </div>
   </div>

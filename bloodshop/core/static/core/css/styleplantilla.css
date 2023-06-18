@@ -20,7 +20,7 @@ h2{
 }
 .carrito{
     max-width: 100%;
-    width: 200px;
+    width: 100px;
 }
 
 
@@ -107,7 +107,6 @@ footer{
 }
 
 img{
-    height: 200px;
     width: 300px;
 }
 .redes{

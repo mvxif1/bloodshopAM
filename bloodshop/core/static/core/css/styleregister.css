@@ -66,6 +66,7 @@ input{
 
 }
 .label-title{
+    margin-top: 15px;
     color: rgba(0, 0, 0, 0.700);
     text-transform: uppercase;
     font-size: 15px;
@@ -104,7 +105,7 @@ input{
 }
 .div-cont-register{
     margin: 20px 0 ;
-    text-align: left;
+    text-align: center;
 }
 .a-cont1-register{
     font-family: 'Kanut'sans-serif;

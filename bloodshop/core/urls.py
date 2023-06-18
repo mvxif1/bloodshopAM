@@ -1,6 +1,5 @@
 from django.urls import path
-
-from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, inicio, inicioadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas, editarshoes, ingresarzapatilla, eliminarZap, actualizarZapatilla, agregar_al_carrito, productos_disponibles
+from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas, editarshoes, ingresarzapatilla, eliminarZap, actualizarZapatilla, agregar_a_carrito, aumentar_cantidad, disminuir_cantidad, eliminar_zapatilla, login, registro_usuario
 from core import views
 
 urlpatterns = [
@@ -14,7 +13,7 @@ urlpatterns = [
     path('detailsgirl4/', detailsgirl4, name="detailsgirl4"),
     path('detailsgirl5/', detailsgirl5, name="detailsgirl5"),
     path('detailsgirl6/', detailsgirl6, name="detailsgirl6"),
-    path('detailsmen1/', detailsmen1, name="detailsmen1"),
+    path('detailsmen1/<int:pk>', detailsmen1, name="detailsmen1"),
     path('detailsmen2/', detailsmen2, name="detailsmen2"),
     path('detailsmen3/', detailsmen3, name="detailsmen3"),
     path('detailsmen4/', detailsmen4, name="detailsmen4"),
@@ -25,23 +24,27 @@ urlpatterns = [
     path('detailsninos3/', detailsninos3, name="detailsninos3"),
     path('detailsninos4/', detailsninos4, name="detailsninos4"),
     path('detailsninos5/', detailsninos5, name="detailsninos5"),
-    path('detailsninos6/', detailsninos6, name="detailsninos6"),   
+    path('detailsninos6/', detailsninos6, name="detailsninos6"), 
+    path('login/', login, name="login"),   
     path('hombreadmin/', hombreadmin, name="hombreadmin"),
     path('hombre/', hombre, name="hombre"),
-    path('inicioadmin/', inicioadmin, name="inicioadmin"),
     path('iniciobloodshopadmin/', iniciobloodshopadmin, name="iniciobloodshopadmin"),
     path('lista_zapatillas', lista_zapatillas, name= "lista_zapatillas"),
     path('editarshoes/<int:idzap>', editarshoes, name= "editarshoes"),
     path('ingresarzapatilla/', ingresarzapatilla, name= "ingresarzapatilla"),
     path('eliminarZap/<int:idzap>', eliminarZap, name= "eliminarZap"),
     path('actualizarZapatilla', actualizarZapatilla, name= "actualizarZapatilla"),
-    path('inicio/', inicio, name="inicio"),
+    path('registro_usuario', registro_usuario, name= "registro_usuario"),
     path('mujeradmin/', mujeradmin, name="mujeradmin"),
     path('mujer/', mujer, name="mujer"),
     path('ninosadmin/', ninosadmin, name="ninosadmin"),
     path('ninos/', ninos, name="ninos"),
     path('olvidepassword/', olvidepassword, name="olvidepassword"),
     path('register/', register, name="register"),
-    path('agregar_al_carrito/<int:zapatilla_id>/', agregar_al_carrito, name='agregar_al_carrito'),
-    path('productos_disponibles/', productos_disponibles, name='productos_disponibles'),
+    
+
+    path('agregar_a_carrito/<int:id_producto>/', agregar_a_carrito, name="agregar_a_carrito"),
+    path('aumentar_cantidad/<int:id_producto>/', aumentar_cantidad, name="aumentar_cantidad"),
+    path('disminuir_cantidad/<int:id_producto>/', disminuir_cantidad, name="disminuir_cantidad"),
+    path('eliminar_zapatilla/<int:id_producto>/', views.eliminar_zapatilla, name="eliminar_zapatilla"),
 ] 

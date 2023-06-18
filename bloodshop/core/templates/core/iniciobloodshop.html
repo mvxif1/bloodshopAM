@@ -43,17 +43,20 @@
           
         </ul>
 
-        <form class="d-flex">
+        <form action="" class="d-flex" method="POST">
+          {% csrf_token %}
           <input class="form-control me-2" type="text" placeholder="Que Buscas">
           <button type="submit">
             <i class="fa fa-search"></i>
           </button>
-          <a class="btn btn-secundary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+          {% if user.is_authenticated %}
+          <a class="btn btn-secundary" href="#">@{{user.username}}</a>
+          <a class="btn btn-secundary" href="{% url 'logout' %}">Cerrar Sesión</a>
+          {% else %}
+          <a class="btn btn-secundary" href="{% url 'login' %}">Iniciar Sesión</a>
+          {% endif %}
           <a href="{% url 'carrito' %}">
             <img class="carrito" src="{% static 'core/img/carritodecompras.png' %}" alt="Carrito">
-          </a>
-          <a href="{% url 'inicioadmin' %}">
-            <img class="carrito" src="{% static 'core/img/admin.png' %}" alt="Admin">
           </a>
         </form>
 
@@ -250,7 +253,7 @@
           <p class="tittle-shoes">Air Jordan 13 Retro Chicago</p>
           <p class="p-price">$169.990</p>
           <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-          <a class="btn-details" href="{% url 'detailsmen6' %}">DETALLES</a>
+          <a class="btn-details" href="{{ zapatilla.get_absolute_url }}">DETALLES</a>
         </div>
       </div>
       <div class="col">
@@ -261,7 +264,7 @@
           <p class="tittle-shoes">Nike Air Force 1 Travis Scott</p>
           <p class="p-price">$309.990</p>
           <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-          <a class="btn-details" href="{% url 'detailsmen1' %}">DETALLES</a>
+          <a class="btn-details" href="{{ zapatilla.get_absolute_url }}">DETALLES</a>
 
         </div>
       </div>
@@ -273,7 +276,7 @@
           <p class="tittle-shoes">Bad Bunny Low Forum</p>
           <p class="p-price">$329.990</p>
           <a class="btn-carro" href="">AÑADIR AL CARRO</a>
-          <a class="btn-details" href="{% url 'detailsmen2' %}">DETALLES</a>
+          <a class="btn-details" href="{{ zapatilla.get_absolute_url }}">DETALLES</a>
 
         </div>
       </div>

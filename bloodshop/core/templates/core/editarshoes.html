@@ -29,7 +29,7 @@
                     {% csrf_token %}
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Id Zapatilla</label>
-                        <input value= "{{ datos.id_producto }}" type="number" id="idzap" name="idzap" class="p-cont-b" required>
+                        <input value= "{{ datos.id_producto }}" type="number" id="idzap" name="idzap" class="p-cont-b" readonly>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Nombre Zapatilla</label>
@@ -48,7 +48,16 @@
                         {% endfor %}
                         </select>
                     </div>
-
+                    <div class="col-md-6 col-sm-12">
+                        <label class="label-title">Tipo</label>
+                        <select name="tipo" id="tipo"  class="p-cont-b1">
+                            
+                                <option value="{{datos.tipo}}">Hombre</option>
+                                <option value="{{datos.tipo}}">Mujer</option>
+                                <option value="{{datos.tipo}}">Niño</option>
+                            
+                        </select>
+                    </div>
                     <div class="col-md-6 col-sm-12">
                         <label class="label-title">Descripcion Zapatilla</label>
                         <textarea class="form-control1" id="desczap" name="desczap" cols="30" rows="5" required>{{ datos.descripcion }}</textarea>

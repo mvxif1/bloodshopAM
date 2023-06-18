@@ -24,8 +24,12 @@
     <div class="div-cont-title">
         <a class="a-cont">Listado de Zapatillas</a>
     </div>
-    <div>
-        <a href="{% url 'adminshoes' %}" class="btn-mod">Ingresar Zapatilla</a>
+    <div class="col-md-3">
+        <a style="margin-left: 10px;" href="{% url 'adminshoes' %}" class="btn_mod">Ingresar Zapatilla</a>
+    </div>
+    
+    <div class="col-md-3">
+        <a style="margin-left: 10px;" href="{% url 'iniciobloodshop' %}" class="btn_mod">Inicio Pagina</a>
     </div>
     {% if messages %}
         {% for message in messages %}
@@ -40,6 +44,7 @@
             <tr>
                 <th>Id Producto</th>
                 <th>Nombre</th>
+                <th>Tipo</th>
                 <th>Marca</th>
                 <th>Descripcion</th>
                 <th>Talla</th>
@@ -54,6 +59,7 @@
             <tr>
                 <td>{{ m.id_producto }}</td>
                 <td class="td_nom">{{ m.nombreproduct }}</td>
+                <td>{{ m.tipo }}</td>
                 <td class="td_nom">{{ m.marcaproduct }}</td>
                 <td>{{ m.descripcion }}</td>
                 <td>{{ m.talla }}</td>
@@ -63,7 +69,7 @@
                     <img src="{{ m.foto.url }}" alt="NO FOTO">
 
                 </td>
-                <td>{{m.signo}} {{ m.precio }}</td>
+                <td> ${{ m.precio }}</td>
 
                 <td>
                     <a href="{% url 'editarshoes' m.id_producto %}" class="btn_mod">Modificar</a>

@@ -1,10 +1,38 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Usuario, Venta, Marca, Zapatilla, Carrito
-
+from .forms import RegistrationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 # Create your views here.
-    
+
+def registro_usuario(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        apellido = request.POST['apellido']
+        rut = request.POST['rut']
+        fechnac = request.POST['fechnac']
+        telefono = request.POST['telefono']
+        email = request.POST['email']
+        clave = request.POST['clave']
+        confemail = request.POST['confemail']
+        confclave = request.POST['confclave']
+
+        # Realiza las validaciones que necesites aquí
+        # ...
+
+        # Crea un nuevo usuario en la base de datos
+        usuario = User.objects.create_user(username=rut, password=clave, email=email, first_name=nombre, last_name=apellido)
+        
+        # Puedes asignar otros atributos personalizados al usuario si lo deseas
+        usuario.telefono = telefono
+        usuario.fecha_nacimiento = fechnac
+        usuario.save()
+        
+        return redirect('iniciobloodshop')  # redirige a la página después del registro exitoso
+
+    return render(request, 'core/register.html')
 def carrito(request):
     return render(request, 'core/carrito.html')
     
@@ -40,8 +68,9 @@ def detailsgirl5(request):
 def detailsgirl6(request):
     return render(request, 'core/detailsgirl6.html')
     
-def detailsmen1(request):
-    return render(request, 'core/detailsmen1.html')
+def detailsmen1(request, pk):
+    zapatilla = get_object_or_404(Zapatilla, pk=pk)
+    return render(request, 'core/detailsmen1.html', {'zapatilla': zapatilla})
     
 def detailsmen2(request):
     return render(request, 'core/detailsmen2.html')
@@ -77,40 +106,66 @@ def detailsninos6(request):
     return render(request, 'core/detailsninos6.html')
 
 def hombre(request):
-    zapatilla = Zapatilla.objects.all()
+    zapatilla = Zapatilla.objects.filter(tipo = "Hombre")
     contexto = {
-        "zapatillas" : zapatilla
+        "zapatillas" : zapatilla,
     }
     return render(request, 'core/hombre.html', contexto)
 
-def agregar_al_carrito(request, zapatilla_id):
-    zapatilla = Zapatilla.objects.get(id=zapatilla_id)
-    carrito, _ = Carrito.objects.get_or_create(usuario=request.user, zapatilla=zapatilla)
-    carrito.cantidad += 1
-    carrito.save()
+def carrito(request):
+    carrito = []
+    total_compra = 0
+    if 'carrito' in request.session:
+        carrito_ids = request.session['carrito']
+        carrito = Zapatilla.objects.filter(id_producto__in=carrito_ids)
+        total_compra = sum(zapatilla.precio * zapatilla.cantidad for zapatilla in carrito)
+    return render(request, 'core/carrito.html', {'carrito': carrito, 'total_compra': total_compra})
 
+def agregar_a_carrito(request, id_producto):
+    if 'carrito' not in request.session:
+        request.session['carrito'] = []
+    carrito_ids = request.session['carrito']
+    carrito_ids.append(id_producto)
+    request.session['carrito'] = carrito_ids
+    request.session.modified = True
+    
+    messages.add_message(request, messages.SUCCESS, 'Se añadió al carrito')
     return redirect('carrito')
 
-def carrito(request):
-    carrito = Carrito.objects.filter(usuario=request.user)
-    total = 0
-    for item in carrito:
-        total += item.zapatilla.precio * item.cantidad
-    return render(request, 'carrito.html', {'carrito': carrito, 'total': total})
+def aumentar_cantidad(request, id_producto):
+    if 'carrito' in request.session:
+        carrito_ids = request.session['carrito']
+        if id_producto in carrito_ids:
+            producto = get_object_or_404(Zapatilla, id_producto=id_producto)
+            producto.cantidad += 1
+            producto.save()
+    return redirect('carrito')
 
-def productos_disponibles(request):
-    zapatillas = Zapatilla.objects.all()
-    return render(request, 'productos_disponibles.html', {'zapatillas': zapatillas})
+def disminuir_cantidad(request, id_producto):
+    if 'carrito' in request.session:
+        carrito_ids = request.session['carrito']
+        if id_producto in carrito_ids:
+            producto = get_object_or_404(Zapatilla, id_producto=id_producto)
+            if producto.cantidad > 1:
+                producto.cantidad -= 1
+                producto.save()
+            else:
+                carrito_ids.remove(id_producto)
+                request.session['carrito'] = carrito_ids
+    return redirect('carrito')
+
+def eliminar_zapatilla(request, id_producto):
+    if 'carrito' in request.session:
+        carrito_ids = request.session['carrito']
+        if id_producto in carrito_ids:
+            carrito_ids.remove(id_producto)
+            request.session['carrito'] = carrito_ids
+    return redirect('carrito')
+
 
 def hombreadmin(request):
     return render(request, 'core/hombreadmin.html')
     
-def inicio(request):
-    return render(request, 'core/inicio.html')
-    
-def inicioadmin(request):
-    return render(request, 'core/inicioadmin.html')
-
 def iniciobloodshop(request):
     return render(request, 'core/iniciobloodshop.html')
     
@@ -118,10 +173,17 @@ def iniciobloodshopadmin(request):
     return render(request, 'core/iniciobloodshopadmin.html')
     
 def mujer(request):
-    return render(request, 'core/mujer.html')
+    zapatilla = Zapatilla.objects.filter(tipo = "Mujer")
+    contexto = {
+        "zapatillas" : zapatilla
+    }
+    return render(request, 'core/mujer.html', contexto)
         
 def mujeradmin(request):
     return render(request, 'core/mujeradmin.html')
+
+def login(request):
+    return render(request, 'core/login.html')
 
 def ninos(request):
     return render(request, 'core/ninos.html')
@@ -132,15 +194,14 @@ def ninosadmin(request):
 def olvidepassword(request):
     return render(request, 'core/olvidepassword.html')
 
+
 def register(request):
     return render(request, 'core/register.html')
 
 def lista_zapatillas(request):
-    
     listaZapatilla = Zapatilla.objects.all()
     contexto = {
         "listasZapatillas": listaZapatilla,
-        "signo": "$",
     }
     return render(request,'core/lista_zapatillas.html',contexto)
 
@@ -166,6 +227,7 @@ def ingresarzapatilla(request):
         foto = request.FILES['imgzap']
         idZ     = request.POST['idzap']
         nombre = request.POST['nombrezap']
+        tipoz = request.POST['tipo']
         marca = request.POST['marca']
         descripcion = request.POST['desczap']
         talla2 = request.POST['tallazap']
@@ -175,7 +237,7 @@ def ingresarzapatilla(request):
         marcaZapatilla = Marca.objects.get(codigoMarca = marca)
 
         zapatilla = Zapatilla.objects.create(
-            id_producto = idZ, nombreproduct = nombre, marcaproduct = marcaZapatilla, descripcion = descripcion, talla = talla2, cantidad = cantidad2, foto = foto , precio = precio)
+            id_producto = idZ, nombreproduct = nombre, tipo = tipoz, marcaproduct = marcaZapatilla, descripcion = descripcion, talla = talla2, cantidad = cantidad2, foto = foto , precio = precio)
         messages.add_message(request, messages.SUCCESS, 'El registro se ha guardado correctamente.')
         return redirect('adminshoes')
 
@@ -188,6 +250,7 @@ def eliminarZap(request, idzap):
 
 def actualizarZapatilla(request):
     idS     = request.POST['idzap']
+    tipoz2     = request.POST['tipo']
     nombreS = request.POST['nombrezap']
     marcaS = request.POST['marcaS']
     descripcionS = request.POST['desczap']
@@ -199,6 +262,7 @@ def actualizarZapatilla(request):
     zapatilla.nombreproduct = nombreS
 
     marcaZapatilla = Marca.objects.get(codigoMarca = marcaS)
+    zapatilla.tipo = tipoz2
     zapatilla.marcaproduct = marcaZapatilla
     zapatilla.descripcion = descripcionS
     zapatilla.talla = tallaS 

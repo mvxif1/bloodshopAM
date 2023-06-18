@@ -48,7 +48,7 @@ body{
     font-size: 15px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.p-cont-b{
+input{
     color: rgb(0, 0, 0);
     width: 100%;
     padding: 20px;
@@ -63,7 +63,7 @@ input{
     box-sizing: border-box;
 
 }
-.label-title{
+label{
     color: rgba(0, 0, 0, 0.700);
     margin: 10px ;
     text-transform: uppercase;

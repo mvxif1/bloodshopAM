@@ -15,7 +15,7 @@
 <body>
     <br></br>
     <div class="div-cont-title">
-        <a class="a-cont" href="{% url 'iniciobloodshopadmin' %}">BLOODSHOP</a>
+        <a class="a-cont" >BLOODSHOP</a>
         <p></p>
     </div>
 
@@ -51,6 +51,17 @@
                             {% for x in marcas %}
                                 <option value="{{ x.codigoMarca }}">{{ x.nombreMarca }}</option>
                             {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <label class="label-title">Tipo</label>
+                        <select name="tipo" id="tipo"  class="p-cont-b1">
+                            
+                                <option value="Hombre">Hombre</option>
+                                <option value="Mujer">Mujer</option>
+                                <option value="Niño">Niño</option>
+                            
                         </select>
                     </div>
 
