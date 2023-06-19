@@ -91,8 +91,8 @@
                   {% endfor %}
                 
                     <th scope="row" style="margin-top: 20px; text-align: center;">Total: </th>
-                    <td colspan="2" style="margin-left: 100px;">$ {{ total_compra }}</td>
-                    <a class="tn_mod" href="{% url 'ingresar_datos' %}">Pagar</a>
+                    <td colspan="2" style="margin-left: 10px;">$ {{ total_compra }}
+                      <a class="btn btn-danger" style="padding: 5px 15px; margin-left: 20px;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UDL6KV4BJF9VS">Pagar</a></td>
                 </tbody>
               </table>
 

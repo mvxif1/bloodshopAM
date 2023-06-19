@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import Usuario, Venta, Marca, Zapatilla, Carrito
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from .forms import DatosCompraForm, RegistrationForm
 # Create your views here.
 
 def registro_usuario(request):
@@ -67,10 +68,18 @@ def detailsgirl6(request):
     return render(request, 'core/detailsgirl6.html')
 
 def ingresar_datos(request):
-    return render(request, 'core/ingresar_datos.html')
-    
+    if request.method == 'POST':
+        form = DatosCompraForm(request.POST)
+        if form.is_valid():
+            # Aquí puedes procesar los datos de la compra, como guardarlos en la base de datos o enviar un correo electrónico de confirmación.
+            return redirect('confirmar_pago')
+    else:
+        form = DatosCompraForm()
+    return render(request, 'core/ingresar_datos.html', {'form': form})
+  
 def confirmar_pago(request):
     return render(request, 'core/confirmar_pago.html')
+
 def detailsmen1(request, pk):
     zapatilla = get_object_or_404(Zapatilla, pk=pk)
     return render(request, 'core/detailsmen1.html', {'zapatilla': zapatilla})
@@ -273,5 +282,3 @@ def actualizarZapatilla(request):
     zapatilla.precio = precioS
     zapatilla.save()   
     return redirect('lista_zapatillas')
-
-    
