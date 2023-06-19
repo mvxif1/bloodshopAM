@@ -16,7 +16,7 @@ class Usuario(models.Model):
     contraseña          = models.CharField(max_length=30)
 
     def __str__(self) -> str:
-        return self.nombreusuario
+        return self.nombre  
 
 class Marca(models.Model):
     codigoMarca = models.AutoField(primary_key=True,verbose_name='Código de la zapatilla' )

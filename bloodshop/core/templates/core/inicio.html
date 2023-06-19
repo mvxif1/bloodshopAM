@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'core/css/styleinicio.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,800&display=swap" rel="stylesheet">
+    <title>Bloodshop</title>
+</head>
+
+<body>
+    <br></br>
+    <div class="div-cont">
+        <a class="a-cont" href="{% url 'iniciobloodshop' %}">BLOODSHOP</a>
+        <p></p>
+    </div>
+
+    <div class="div-cont">
+        <a class="a-cont1">Accede a tu cuenta</a>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            {% if messages %}
+                {% for message in messages %}
+                    <div>{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <form action="{% url 'inicio' %}" method="POST" id="form2">
+                {% csrf_token %}
+                <div class="col-md-12 col-sm-12">
+                    <label for="email" class="label-title">Email</label>
+                    <input type="email" id="email" class="p-cont-b" required>
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                    <label for="clave" class="label-title">Contraseña</label>
+                    <input type="password" id="clave" class="p-cont-b" required>
+                </div>
+
+                <a class="p-cont12" href="{% url 'olvidepassword' %}">¿Olvidaste tu contraseña?</a>
+
+                <div class="div-cont2">
+
+                    <div class="col-6 columna">
+                        <button id="submit" type="submit" href="" class="a-cont-b1">Iniciar Sesión</button>
+                    </div>
+                    <br>
+                    <a class="p-cont1">Necesitas una cuenta?</a>
+                    <a class="p-cont123" href="{% url 'register' %}">Registrate</a>
+            </form>
+            <script src="/scripts/validaciones-login.js"></script>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

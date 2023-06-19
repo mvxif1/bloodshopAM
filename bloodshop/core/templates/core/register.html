@@ -36,7 +36,7 @@
                 <div class="div-cont-register">
                     <a class="a-cont1-register">Registro de nuevo usuario</a>
                 </div>
-                <form action="{% url 'registro' %}" method="POST" enctype="multipart/form-data" name="form">
+                <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data" name="form">
                     {% csrf_token %}
                     <div class="col-md-6 col-sm-6 ">
                         <label for="nombre" class="label-title">Nombre</label>
@@ -92,10 +92,11 @@
                     <div class="col-6 columna">
                         <button id="submit" type="submit" class="a-cont-b1">Registrarse</button>
                     </div>
+                    
+                
 
                 </form>
-                <script src="{% static 'core/js/validaciones-registro.js' %}"></script>
-
+                <script src="{% static 'core/js/validacionesregistro.js' %}"></script>
             </div>
         </div>
     </div>

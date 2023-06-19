@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas, editarshoes, ingresarzapatilla, eliminarZap, actualizarZapatilla, agregar_a_carrito, aumentar_cantidad, disminuir_cantidad, eliminar_zapatilla, login, registro_usuario
+from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas, editarshoes, ingresarzapatilla, eliminarZap, actualizarZapatilla, agregar_a_carrito, aumentar_cantidad, disminuir_cantidad, eliminar_zapatilla, inicio, ingresar_datos, confirmar_pago
 from core import views
 
 urlpatterns = [
@@ -25,16 +25,17 @@ urlpatterns = [
     path('detailsninos4/', detailsninos4, name="detailsninos4"),
     path('detailsninos5/', detailsninos5, name="detailsninos5"),
     path('detailsninos6/', detailsninos6, name="detailsninos6"), 
-    path('login/', login, name="login"),   
+    path('inicio/', inicio, name="inicio"),  
     path('hombreadmin/', hombreadmin, name="hombreadmin"),
     path('hombre/', hombre, name="hombre"),
+    path('confirmar_pago/', confirmar_pago, name="confirmar_pago"),
     path('iniciobloodshopadmin/', iniciobloodshopadmin, name="iniciobloodshopadmin"),
+    path('ingresar_datos/', ingresar_datos, name="ingresar_datos"),
     path('lista_zapatillas', lista_zapatillas, name= "lista_zapatillas"),
     path('editarshoes/<int:idzap>', editarshoes, name= "editarshoes"),
     path('ingresarzapatilla/', ingresarzapatilla, name= "ingresarzapatilla"),
     path('eliminarZap/<int:idzap>', eliminarZap, name= "eliminarZap"),
     path('actualizarZapatilla', actualizarZapatilla, name= "actualizarZapatilla"),
-    path('registro_usuario', registro_usuario, name= "registro_usuario"),
     path('mujeradmin/', mujeradmin, name="mujeradmin"),
     path('mujer/', mujer, name="mujer"),
     path('ninosadmin/', ninosadmin, name="ninosadmin"),
