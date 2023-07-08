@@ -1,37 +1,54 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Usuario, Venta, Marca, Zapatilla, Carrito
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import DatosCompraForm, RegistrationForm
 # Create your views here.
 
-def registro_usuario(request):
-    if request.method == 'POST':
-        nombre = request.POST['nombre']
-        apellido = request.POST['apellido']
-        rut = request.POST['rut']
-        fechnac = request.POST['fechnac']
-        telefono = request.POST['telefono']
-        email = request.POST['email']
-        clave = request.POST['clave']
-        confemail = request.POST['confemail']
-        confclave = request.POST['confclave']
+def register(request):
+    if request.method == "POST":
+        nombreUser = request.POST['nombre']
+        apellidoUser = request.POST['apellido']
+        rutUser = request.POST['rut']
+        fechaUser = request.POST['fechnac']
+        telefonoUser = request.POST['telefono']
+        emailUser = request.POST['email']
+        claveUser = request.POST['clave']
+        confemailUser = request.POST['confemail']
+        confclaveUser = request.POST['confclave']
 
-        # Realiza las validaciones que necesites aquí
-        # ...
-
-        # Crea un nuevo usuario en la base de datos
-        usuario = User.objects.create_user(username=rut, password=clave, email=email, first_name=nombre, last_name=apellido)
+        if User.objects.filter(first_name=nombreUser):
+            messages.error(request, "Username already exist! Please try some other username.")
+            return redirect('inicio')
         
-        # Puedes asignar otros atributos personalizados al usuario si lo deseas
-        usuario.telefono = telefono
-        usuario.fecha_nacimiento = fechnac
-        usuario.save()
+        if User.objects.filter(email=emailUser).exists():
+            messages.error(request, "Email Already Registered!!")
+            return redirect('inicio')
+        
+        if claveUser != confclaveUser:
+            messages.error(request, "Passwords didn't matched!!")
+            return redirect('inicio')
+        
+        
+
+        usuario = Usuario.objects.create(rut= rutUser, nombre= nombreUser, apellido= apellidoUser, fecha_nacimiento= fechaUser, telefono= telefonoUser, email= emailUser, contraseña= claveUser)    
+
+        user = User.objects.create_user(username = emailUser, first_name= nombreUser, email = emailUser, password= claveUser)
+        user.first_name = fname
+        user.save()
+        messages.success(request, 'Cuenta creada con exito')
+        
         
         return redirect('iniciobloodshop')  # redirige a la página después del registro exitoso
 
     return render(request, 'core/register.html')
+
+def signout(request):
+    logout(request)
+    messages.success(request, "Cerraste Sesión!")
+    return redirect('inicio')
+
 def carrito(request):
     return render(request, 'core/carrito.html')
     
@@ -177,7 +194,7 @@ def eliminar_zapatilla(request, id_producto):
 
 def hombreadmin(request):
     return render(request, 'core/hombreadmin.html')
-    
+
 def iniciobloodshop(request):
     return render(request, 'core/iniciobloodshop.html')
     
@@ -205,10 +222,6 @@ def ninosadmin(request):
     
 def olvidepassword(request):
     return render(request, 'core/olvidepassword.html')
-
-
-def register(request):
-    return render(request, 'core/register.html')
 
 def lista_zapatillas(request):
     listaZapatilla = Zapatilla.objects.all()
