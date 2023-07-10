@@ -23,6 +23,10 @@ def register(request):
             messages.error(request, "Este correo ya está registrado!")
             return redirect('inicio')
         
+        if emailUser != confemailUser:
+            messages.error(request, "El email no coincide!")
+            return redirect('register')
+
         if claveUser != confclaveUser:
             messages.error(request, "La contraseña no coincide!")
             return redirect('register')
@@ -31,7 +35,7 @@ def register(request):
             return JsonResponse({'success': False, 'message': 'Por favor, complete todos los campos.'})
 
         Usuario.objects.create(rut= rutUser, nombre= nombreUser, apellido= apellidoUser, fecha_nacimiento= fechaUser, telefono= telefonoUser, email= emailUser, contraseña= claveUser)    
-        
+
         user = User.objects.create_user(username = emailUser, password= claveUser, first_name= nombreUser, last_name= apellidoUser, email = emailUser)
         messages.success(request, 'Cuenta creada con exito')
         
@@ -287,39 +291,49 @@ def eliminarZap(request, idzap):
     messages.add_message(request, messages.SUCCESS, 'El registro se ha eliminado correctamente.')
     return redirect('lista_zapatillas')
 
+@login_required
 def editarperfil(request):
-    usuario = request.user
+    user = request.user
+    usuario = Usuario.objects.get(email=user.username)
+    context = {
+        'usuario': usuario
+    }
+    
+    return render(request, 'core/editarperfil.html', context)
 
-    if request.method == 'POST':
-        nombre = request.POST('nombre')
-        apellido = request.POST('apellido')
-        rut = request.POST('rut')
-        fechnac = request.POST('fechnac')
-        telefono = request.POST('telefono')
-        email = request.POST('email')
-        contraseña = request.POST('clave')
-
-        # Validar campos
-        if not (nombre and apellido and rut and fechnac and telefono and email and contraseña):
-            return render(request, 'editarperfil.html', {'usuario': usuario, 'error': 'Todos los campos son requeridos'})
-
-        # Actualizar perfil del usuario
-        usuario.usuario.nombre = nombre
-        usuario.usuario.apellido = apellido
-        usuario.usuario.rut = rut
-        usuario.usuario.fecha_nacimiento = fechnac
-        usuario.usuario.telefono = telefono
-        usuario.email = email
-        usuario.set_password(contraseña)
-
-        usuario.save()
-        usuario.usuario.save()
-
-        return redirect('inicio')
-    return render(request, 'core/editarperfil.html', {'usuario': usuario})
-
+@login_required
 def actualizarperfil(request):
-    return redirect('iniciobloodshop')
+    user = request.user
+    usuario = Usuario.objects.get(email=user.username)
+
+    if request.method == "POST":
+        nombreUser = request.POST['nombreS']
+        apellidoUser = request.POST['apellido']
+        emailUser = request.POST['email']
+        fechaUser = request.POST['fechnac']
+        telefonoUser = request.POST['telefono']
+        
+        usuario.nombre = nombreUser
+        usuario.apellido = apellidoUser
+        usuario.email = emailUser
+        usuario.fecha_nacimiento = fechaUser
+        usuario.telefono = telefonoUser
+        usuario.save()
+        
+        user.first_name = nombreUser
+        user.last_name = apellidoUser
+        user.email = emailUser
+        user.save()
+        
+        messages.add_message(request, messages.SUCCESS, 'Los datos se han guardado correctamente.')
+        return redirect('editarperfil')
+
+    context = {
+        'usuario': usuario
+    }
+
+    return render(request, 'editarperfil.html', context)
+    
 
 def actualizarZapatilla(request):
     idS     = request.POST['idzap']
@@ -343,3 +357,6 @@ def actualizarZapatilla(request):
     zapatilla.precio = precioS
     zapatilla.save()   
     return redirect('lista_zapatillas')
+
+def admin_dashboard(request):
+    return render(request, 'core/admin_dashboard.html')
