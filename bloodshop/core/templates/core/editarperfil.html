@@ -34,34 +34,34 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="div-cont-register">
-                    <a class="a-cont1-register">Registro de nuevo usuario</a>
+                    <a class="a-cont1-register">Editar perfil</a>
                 </div>
-                <form action="/register/" method="POST" enctype="multipart/form-data" name="form3">
+                <form method="POST" enctype="multipart/form-data" name="form3">
                     {% csrf_token %}
                     <div class="col-md-6 col-sm-6 ">
                         <label for="nombre" class="label-title">Nombre</label>
-                        <input type="text" id="nombre" name="nombre"  class="p-cont-b" >
+                        <input type="text" id="nombre" name="nombre" value="{{ usuario.nombre }}" class="p-cont-b" >
                         <div id="incompleto" class="warnings"></div>
 
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <label for="apellido" class="label-title">Apellido</label>
-                        <input type="text" id="apellido"  name="apellido" class="p-cont-b" >
+                        <input type="text" id="apellido"  name="apellido" value="{{ usuario.apellido }}" class="p-cont-b" >
                         <div id="incompleto2" class="warnings"></div>
                     </div>
                     <div class="col-md-6 col-sm-6 ">
                         <label for="rut" class="label-title">Rut</label>
-                        <input type="text" id="rut" name="rut"  placeholder="Ej: 12345678-9" class="p-cont-b" >
+                        <input type="text" id="rut" name="rut" value="{{ usuario.rut }}" placeholder="Ej: 12345678-9" class="p-cont-b" readonly >
                         <div class="warnings" id="msgerror"></div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <label for="fechnac" class="label-title">Fecha de nacimiento</label>
-                        <input type="date" id="fechnac" name="fechnac"  class="p-cont-b-date">
+                        <input type="date" id="fechnac" name="fechnac" value="{{ usuario.fecha }}" class="p-cont-b-date">
                         <div id="incompleto4" class="warnings"></div>
                     </div>
                     <div class="col-md-6 col-sm-6 ">
                         <label for="telefono" class="label-title">Teléfono *Opcional*</label>
-                        <input type="number" id="telefono" name="telefono"  placeholder="Ej: 987324231" class="p-cont-b">
+                        <input type="number" id="telefono" name="telefono" value="{{ usuario.telefono }}" placeholder="Ej: 987324231" class="p-cont-b">
                         <div id="incompleto5" class="warnings"></div>
                     </div>
                     <div class="col-12">
@@ -71,26 +71,16 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <label for="email" class="label-title">Email</label>
-                        <input type="email" id="email" name="email"  class="p-cont-b" >
+                        <input type="email" id="email" name="email" value="{{ usuario.email }}" class="p-cont-b" >
                         <div id="incompleto6" class="warnings"></div>
                     </div>
                     <div class="col-md-6 col-sm-6 ">
                         <label for="clave" class="label-title">Contraseña</label>
-                        <input type="password" id="clave" name="clave"  class="p-cont-b" >
+                        <input type="password" id="clave" name="clave" value="{{ usuario.clave }}" class="p-cont-b" >
                         <div id="incompleto3" class="warnings"></div>
                     </div>
-                    <div class="col-md-6 col-sm-6">
-                        <label for="confemail" class="label-title">Confirmar Email</label>
-                        <input type="email" id="confemail" name="confemail"  class="p-cont-b" >
-                        <div id="incompleto7" class="warnings"></div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 ">
-                        <label for="confclave" class="label-title">Confirmar Contraseña</label>
-                        <input type="password" id="confclave" name="confclave"  class="p-cont-b" >
-                        <div id="incompleto8" class="warnings"></div>
-                    </div>
                     <div class="col-6 columna">
-                        <input id="submit" type="submit" class="a-cont-b1" value="Registrarse"></button>
+                        <input id="submit" type="submit" class="a-cont-b1" value="Guardar Cambios"></button>
                     </div>
                 
                 </form>

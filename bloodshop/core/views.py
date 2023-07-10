@@ -4,6 +4,7 @@ from .models import Usuario, Venta, Marca, Zapatilla, Carrito
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 # Create your views here.
 
 def register(request):
@@ -17,30 +18,25 @@ def register(request):
         claveUser = request.POST['clave']
         confemailUser = request.POST['confemail']
         confclaveUser = request.POST['confclave']
-
-        if User.objects.filter(first_name=nombreUser):
-            messages.error(request, "Username already exist! Please try some other username.")
-            return redirect('inicio')
         
         if User.objects.filter(email=emailUser).exists():
-            messages.error(request, "Email Already Registered!!")
+            messages.error(request, "Este correo ya está registrado!")
             return redirect('inicio')
         
         if claveUser != confclaveUser:
-            messages.error(request, "Passwords didn't matched!!")
-            return redirect('inicio')
+            messages.error(request, "La contraseña no coincide!")
+            return redirect('register')
         
+        if not (nombreUser and apellidoUser and rutUser and fechaUser and telefonoUser and emailUser and claveUser and confemailUser and confclaveUser):
+            return JsonResponse({'success': False, 'message': 'Por favor, complete todos los campos.'})
+
+        Usuario.objects.create(rut= rutUser, nombre= nombreUser, apellido= apellidoUser, fecha_nacimiento= fechaUser, telefono= telefonoUser, email= emailUser, contraseña= claveUser)    
         
-
-        usuario = Usuario.objects.create(rut= rutUser, nombre= nombreUser, apellido= apellidoUser, fecha_nacimiento= fechaUser, telefono= telefonoUser, email= emailUser, contraseña= claveUser)    
-
-        user = User.objects.create_user(username = emailUser, first_name= nombreUser, email = emailUser, password= claveUser)
-        user.first_name = fname
-        user.save()
+        user = User.objects.create_user(username = emailUser, password= claveUser, first_name= nombreUser, last_name= apellidoUser, email = emailUser)
         messages.success(request, 'Cuenta creada con exito')
         
         
-        return redirect('iniciobloodshop')  # redirige a la página después del registro exitoso
+        return redirect('inicio')  # redirige a la página después del registro exitoso
 
     return render(request, 'core/register.html')
 
@@ -134,6 +130,7 @@ def detailsninos5(request):
 def detailsninos6(request):
     return render(request, 'core/detailsninos6.html')
 
+@login_required
 def hombre(request):
     zapatilla = Zapatilla.objects.filter(tipo = "Hombre")
     contexto = {
@@ -195,12 +192,14 @@ def eliminar_zapatilla(request, id_producto):
 def hombreadmin(request):
     return render(request, 'core/hombreadmin.html')
 
+@login_required
 def iniciobloodshop(request):
     return render(request, 'core/iniciobloodshop.html')
     
 def iniciobloodshopadmin(request):
     return render(request, 'core/iniciobloodshopadmin.html')
-    
+
+@login_required   
 def mujer(request):
     zapatilla = Zapatilla.objects.filter(tipo = "Mujer")
     contexto = {
@@ -211,9 +210,24 @@ def mujer(request):
 def mujeradmin(request):
     return render(request, 'core/mujeradmin.html')
 
+
 def inicio(request):
+    if request.method == 'POST':
+        emailUser = request.POST['email']
+        claveUser = request.POST['clave']
+        
+        user = authenticate(request, username=emailUser, password=claveUser)
+        
+        if user is not None:
+            login(request, user)
+            # messages.success(request, "Logged In Sucessfully!!")
+            return render(request, "core/iniciobloodshop.html")
+        else:
+            messages.error(request, "Email o Contraseña incorrecta!")
+            return redirect('inicio')
     return render(request, 'core/inicio.html')
 
+@login_required
 def ninos(request):
     return render(request, 'core/ninos.html')
     
@@ -272,6 +286,40 @@ def eliminarZap(request, idzap):
 
     messages.add_message(request, messages.SUCCESS, 'El registro se ha eliminado correctamente.')
     return redirect('lista_zapatillas')
+
+def editarperfil(request):
+    usuario = request.user
+
+    if request.method == 'POST':
+        nombre = request.POST('nombre')
+        apellido = request.POST('apellido')
+        rut = request.POST('rut')
+        fechnac = request.POST('fechnac')
+        telefono = request.POST('telefono')
+        email = request.POST('email')
+        contraseña = request.POST('clave')
+
+        # Validar campos
+        if not (nombre and apellido and rut and fechnac and telefono and email and contraseña):
+            return render(request, 'editarperfil.html', {'usuario': usuario, 'error': 'Todos los campos son requeridos'})
+
+        # Actualizar perfil del usuario
+        usuario.usuario.nombre = nombre
+        usuario.usuario.apellido = apellido
+        usuario.usuario.rut = rut
+        usuario.usuario.fecha_nacimiento = fechnac
+        usuario.usuario.telefono = telefono
+        usuario.email = email
+        usuario.set_password(contraseña)
+
+        usuario.save()
+        usuario.usuario.save()
+
+        return redirect('inicio')
+    return render(request, 'core/editarperfil.html', {'usuario': usuario})
+
+def actualizarperfil(request):
+    return redirect('iniciobloodshop')
 
 def actualizarZapatilla(request):
     idS     = request.POST['idzap']

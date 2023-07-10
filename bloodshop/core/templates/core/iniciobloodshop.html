@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% load static %}
+{% load static %}
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,22 +41,24 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'ninos' %}">NIÑOS</a>
           </li>
-          
+
         </ul>
 
+        <form class="d-flex">
           <input class="form-control me-2" type="text" placeholder="Que Buscas">
           <button type="submit">
             <i class="fa fa-search"></i>
           </button>
-          {% if user.is_authenticated %}          
-          <a class="btn btn-secundary" href="/signout">Hola @{{usuario.first_name}}</a>
-          <button class="btn btn-secundary" type="submit"><a style="text-decoration: none; color: white;" href="/signout">Cerrar Sesión</a></button>
+          {% if user.is_authenticated %}
+          <a class="btn btn-secundary" style="width: 50%;" href="{% url 'editarperfil' %}">Hola @{{user.first_name}}</a>
+          <a class="btn btn-secundary" style="width: 50%;" href="/signout">Cerrar Sesión</a>
           {% else %}
-          <a class="btn btn-secundary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+          <a class="btn btn-secundary" style="width: 50%;" href="{% url 'inicio' %}">Iniciar Sesión</a>
           {% endif %}
           <a href="{% url 'carrito' %}">
             <img class="carrito" src="{% static 'core/img/carritodecompras.png' %}" alt="Carrito">
           </a>
+        </form>
 
 
       </div>
@@ -174,41 +177,49 @@
 
     </div>
   </div>
-  
-  
+
+
   <div id="carouselExampleIndicators5" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
     </div>
-    
-    
+
+
     <div class="carousel-inner">
       >
       <div class="carousel-item active">
-        
-        
+
+
         <h2>niños</h2>
-        <a href="{% url 'ninos' %}"><img src="{% static 'core/img/banner niñosp - copia.jpg' %}" class="d-block w-100" alt="..."></a>
-       
+        <a href="{% url 'ninos' %}"><img src="{% static 'core/img/banner niñosp - copia.jpg' %}" class="d-block w-100"
+            alt="..."></a>
+
       </div>
       <div class="carousel-item">
         <h2>niños</h2>
-      <a href="{% url 'ninos' %}"><img src="{% static 'core/img/banner niñosp - copia.jpg' %}" class="d-block w-100" alt="..."></a>
-        
+        <a href="{% url 'ninos' %}"><img src="{% static 'core/img/banner niñosp - copia.jpg' %}" class="d-block w-100"
+            alt="..."></a>
+
       </div>
       <div class="carousel-item">
         <h2>niños</h2>
-        <a href="{% url 'ninos' %}"> <img src="{% static 'core/img/banner niñosp - copia.jpg' %}" class="d-block w-100" alt="..."></a>
-       
+        <a href="{% url 'ninos' %}"> <img src="{% static 'core/img/banner niñosp - copia.jpg' %}" class="d-block w-100"
+            alt="..."></a>
+
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators5"
+      data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators5" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators5"
+      data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
@@ -221,8 +232,8 @@
       <div class="row">
 
         <div class="col order-last">
-          <a href=""> <img src="{% static 'core/img/adidas-new-logo-on-transparent-background-free-vector.jpg' %}" class="borderimg"
-              alt=""></a>
+          <a href=""> <img src="{% static 'core/img/adidas-new-logo-on-transparent-background-free-vector.jpg' %}"
+              class="borderimg" alt=""></a>
         </div>
         <div class="col">
           <a href=""> <img src="{% static 'core/img/13._Nike.webp' %}" class="borderimg" alt=""></a>
@@ -231,7 +242,8 @@
           <a href=""> <img src="{% static 'core/img/logo jordan.jpg' %}" class="borderimg" alt=""> </a>
         </div>
         <div class="col order-first">
-          <a href=""> <img src="{% static 'core/img/puma-logo-puma-icon-free-free-vector.jpg' %}" class="borderimg" alt=""></a>
+          <a href=""> <img src="{% static 'core/img/puma-logo-puma-icon-free-free-vector.jpg' %}" class="borderimg"
+              alt=""></a>
         </div>
       </div>
     </div>
@@ -240,7 +252,9 @@
 
 
   <div class="container">
-    <center><h4 class="marca-shoes">Algunos Articulos </h4></center>
+    <center>
+      <h4 class="marca-shoes">Algunos Articulos </h4>
+    </center>
     <div class="row">
       <div class="col order-last">
         <div class="cont-card">
@@ -280,40 +294,40 @@
     </div>
   </div>
 
-  
-    <div class="col-12">
-      <div class="hr1">
-          <hr>
-      </div>
+
+  <div class="col-12">
+    <div class="hr1">
+      <hr>
+    </div>
   </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h3>Sobre nosotros</h3>
-          <p>Somos una empresa dedicada a la venta de calzado en la cual nos preocupamos por nuestros clientes.</p>
-        </div>
-        <div class="col-md-4">
-          <h3>Redes sociales</h3>
-          <ul class="list-unstyled">
-            <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
-            <li><a href="#"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
-            <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h3>Contacto</h3>
-          <ul class="list-unstyled">
-            <li><i class="fa fa-map-marker"></i> Dirección: 123 Calle Principal, Ciudad, Estado, País</li>
-            <li><i class="fa fa-phone"></i> Teléfono: (123) 456-7890</li>
-            <li><i class="fa fa-envelope"></i> Email: info@tudominio.com</li>
-          </ul>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Sobre nosotros</h3>
+        <p>Somos una empresa dedicada a la venta de calzado en la cual nos preocupamos por nuestros clientes.</p>
+      </div>
+      <div class="col-md-4">
+        <h3>Redes sociales</h3>
+        <ul class="list-unstyled">
+          <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+          <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+          <li><a href="#"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
+          <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h3>Contacto</h3>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> Dirección: 123 Calle Principal, Ciudad, Estado, País</li>
+          <li><i class="fa fa-phone"></i> Teléfono: (123) 456-7890</li>
+          <li><i class="fa fa-envelope"></i> Email: info@tudominio.com</li>
+        </ul>
       </div>
     </div>
-  
-  
-  
+  </div>
+
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

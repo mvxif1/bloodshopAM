@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 ]
 
+LOGIN_URL = '/inicio'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

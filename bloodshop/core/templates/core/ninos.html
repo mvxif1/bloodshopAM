@@ -40,7 +40,12 @@
           <button type="submit">
             <i class="fa fa-search"></i>
           </button>
-          <a class="btn btn-secundary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+          {% if user.is_authenticated %}
+          <a class="btn btn-secundary" style="width: 50%;" href="/signout">Hola @{{user.first_name}}</a>
+          <a class="btn btn-secundary" style="width: 50%;" href="/signout">Cerrar Sesión</a>
+          {% else %}
+          <a class="btn btn-secundary" style="width: 50%;" href="{% url 'inicio' %}">Iniciar Sesión</a>
+          {% endif %}
           <a href="{% url 'carrito' %}">
             <img class="carrito" src="{% static 'core/img/carritodecompras.png' %}" alt="Carrito">
           </a>
