@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+ ¡Bienvenidos a Bloodshop!
+ Hola {{ name }}!!
+
+ Por favor, confirme su correo electrónico haciendo clic en el siguiente enlace.
+
+ Enlace de confirmación: http://{{ domain }}{% url 'activate' uidb64=uid token=token %} 
+
+ {% endautoescape %}

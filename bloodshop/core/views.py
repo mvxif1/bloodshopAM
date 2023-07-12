@@ -5,8 +5,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-# Create your views here.
+from django.conf import settings
+from django.core.mail import EmailMessage, send_mail
+from django.urls import reverse
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.utils.encoding import force_bytes, force_text
+from . tokens import generate_token
 
+
+# Create your views here.
 def register(request):
     if request.method == "POST":
         nombreUser = request.POST['nombre']
@@ -21,7 +31,7 @@ def register(request):
         
         if User.objects.filter(email=emailUser).exists():
             messages.error(request, "Este correo ya está registrado!")
-            return redirect('inicio')
+            return redirect('register')
         
         if emailUser != confemailUser:
             messages.error(request, "El email no coincide!")
@@ -34,15 +44,65 @@ def register(request):
         if not (nombreUser and apellidoUser and rutUser and fechaUser and telefonoUser and emailUser and claveUser and confemailUser and confclaveUser):
             return JsonResponse({'success': False, 'message': 'Por favor, complete todos los campos.'})
 
-        Usuario.objects.create(rut= rutUser, nombre= nombreUser, apellido= apellidoUser, fecha_nacimiento= fechaUser, telefono= telefonoUser, email= emailUser, contraseña= claveUser)    
+
+        usuario = Usuario.objects.create(rut= rutUser, nombre= nombreUser, apellido= apellidoUser, fecha_nacimiento= fechaUser, telefono= telefonoUser, email= emailUser, contraseña= claveUser)    
 
         user = User.objects.create_user(username = emailUser, password= claveUser, first_name= nombreUser, last_name= apellidoUser, email = emailUser)
-        messages.success(request, 'Cuenta creada con exito')
+        user.is_active = False
+        user.save()
+        messages.success(request, 'Cuenta creada con exito. Le hemos enviado un correo de confirmación, porfavor confirma el correo para activar tu cuenta.')
         
         
+        # Bienvenidos Email
+        subject = "Bienvenidos a Bloodshop - Confirmacion de cuenta"
+        message = "Hola " + user.first_name + "! \n" + "Bienvenidos a Bloodshop \n \n Gracias por visitar nuestro sitio web \n Le hemos enviado un correo electronico de confirmación, por favor confirme su dirección de correo electronico. \n \n Gracias."  
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [user.email]
+        send_mail(subject, message, from_email, to_list, fail_silently=True)
+        
+        # Confirmación Email
+        current_site = get_current_site(request)
+        email_subject = "Confirma tu Email - Bloodshop"
+        message2 = render_to_string('core/email_confirmation.html',{
+            
+            'name': user.first_name,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': generate_token.make_token(user)
+        })
+        email = EmailMessage(
+        email_subject,
+        message2,
+        settings.EMAIL_HOST_USER,
+        [user.email],
+        )
+        email.fail_silently = True
+        email.send()
         return redirect('inicio')  # redirige a la página después del registro exitoso
 
+
+
     return render(request, 'core/register.html')
+
+def my_view(request):
+    return render(request, 'base.html')
+    
+def activate(request,uidb64,token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        myuser = User.objects.get(pk=uid)
+    except (TypeError,ValueError,OverflowError,User.DoesNotExist):
+        myuser = None
+
+    if myuser is not None and generate_token.check_token(myuser,token):
+        myuser.is_active = True
+        # user.profile.signup_confirmation = True
+        myuser.save()
+        login(request,myuser)
+        messages.success(request, "Tu cuenta ha sido activada, puedes iniciar sesión!")
+        return redirect('inicio')
+    else:
+        return render(request,'core/activation_failed.html')
 
 def signout(request):
     logout(request)
@@ -224,7 +284,7 @@ def inicio(request):
         
         if user is not None:
             login(request, user)
-            # messages.success(request, "Logged In Sucessfully!!")
+            messages.success(request, "Iniciaste sesión con exito!!")
             return render(request, "core/iniciobloodshop.html")
         else:
             messages.error(request, "Email o Contraseña incorrecta!")
@@ -237,9 +297,7 @@ def ninos(request):
     
 def ninosadmin(request):
     return render(request, 'core/ninosadmin.html')
-    
-def olvidepassword(request):
-    return render(request, 'core/olvidepassword.html')
+
 
 def lista_zapatillas(request):
     listaZapatilla = Zapatilla.objects.all()
@@ -301,6 +359,13 @@ def editarperfil(request):
     
     return render(request, 'core/editarperfil.html', context)
 
+def mi_vista(request):
+    ruta_archivo = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'core/js/validacionesregistro.js')
+    with open(ruta_archivo, 'r') as archivo_js:
+        contenido_js = archivo_js.read()
+    
+    return render(request, 'register.html', {'contenido_js': contenido_js})
+
 @login_required
 def actualizarperfil(request):
     user = request.user
@@ -344,12 +409,14 @@ def actualizarZapatilla(request):
     tallaS = request.POST['tallazap']
     cantidadS = request.POST['cantidadzap']
     precioS = request.POST['preciozap']
+    fotoS = request.FILES['imgzap']
 
     zapatilla = Zapatilla.objects.get(id_producto = idS)
     zapatilla.nombreproduct = nombreS
 
     marcaZapatilla = Marca.objects.get(codigoMarca = marcaS)
     zapatilla.tipo = tipoz2
+    zapatilla.foto = fotoS
     zapatilla.marcaproduct = marcaZapatilla
     zapatilla.descripcion = descripcionS
     zapatilla.talla = tallaS 

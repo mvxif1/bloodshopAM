@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, olvidepassword, register, lista_zapatillas, editarshoes, ingresarzapatilla, eliminarZap, actualizarZapatilla, agregar_a_carrito, aumentar_cantidad, disminuir_cantidad, eliminar_zapatilla, inicio, ingresar_datos, confirmar_pago, signout, editarperfil, actualizarperfil, admin_dashboard
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import (LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView)
+from .views import adminshoes, carrito, details, detailsgirl1, detailsgirl2, detailsgirl3, detailsgirl4, detailsgirl5, detailsgirl6, detailsmen1, detailsmen2, detailsmen3, detailsmen4, detailsmen5, detailsmen6, detailsninos1, detailsninos2, detailsninos3, detailsninos4, detailsninos5, detailsninos6, hombre, hombreadmin, iniciobloodshop, iniciobloodshopadmin, mujer, mujeradmin, ninos, ninosadmin, register, lista_zapatillas, editarshoes, ingresarzapatilla, eliminarZap, actualizarZapatilla, agregar_a_carrito, aumentar_cantidad, disminuir_cantidad, eliminar_zapatilla, inicio, ingresar_datos, confirmar_pago, signout, editarperfil, actualizarperfil, admin_dashboard, activate
 from core import views
 
 urlpatterns = [
@@ -42,11 +44,16 @@ urlpatterns = [
     path('mujer/', mujer, name="mujer"),
     path('ninosadmin/', ninosadmin, name="ninosadmin"),
     path('ninos/', ninos, name="ninos"),
-    path('olvidepassword/', olvidepassword, name="olvidepassword"),
     path('register/', register, name="register"),
     path('admin_dashboard/', admin_dashboard, name="admin_dashboard"),
-    
+    path('activate/<uidb64>/<token>', activate, name='activate'),
     path('signout', signout, name='signout'),
+
+    path('reset/password_reset', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
+    path('password-reset/done/', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'),name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),name='password_reset_confirm'),
+    path('password-reset-complete/',PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),name='password_reset_complete'),
+
     
 
     path('agregar_a_carrito/<int:id_producto>/', agregar_a_carrito, name="agregar_a_carrito"),
