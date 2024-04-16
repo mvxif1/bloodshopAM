@@ -83,10 +83,6 @@ def register(request):
 
 
     return render(request, 'core/register.html')
-
-def my_view(request):
-    return render(request, 'base.html')
-    
 def activate(request,uidb64,token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
